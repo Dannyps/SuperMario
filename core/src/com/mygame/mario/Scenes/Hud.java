@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygame.mario.MainClass;
 
-public class BaseStage {
+public class Hud {
     public Stage stage;
     private Viewport viewport;
 
@@ -41,7 +41,7 @@ public class BaseStage {
     Label lworld;
     Label lmario;
 
-    public BaseStage(SpriteBatch sbatch) {
+    public Hud(SpriteBatch sbatch) {
         timer = 300;
         countTime = 0;
         score = 0;
@@ -54,7 +54,7 @@ public class BaseStage {
         table.setFillParent(true);
 
         lcount = new Label(String.format("%03d", timer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        //lscore = new Label(String.format("%03d", timer),new Label.)
+        lscore = new Label(String.format("%03d", timer),new Label.LabelStyle());
         Label ltime;
         Label llevel;
         Label lworld;

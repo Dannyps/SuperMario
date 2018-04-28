@@ -2,18 +2,37 @@ package com.mygame.mario.Levels;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygame.mario.MainClass;
+import com.mygame.mario.Scenes.Hud;
+import com.mygame.mario.Logic.LoadMap;
 
 public class BaseScreen implements Screen {
 
     private MainClass game;
-    //Texture texture;
+    private TextureAtlas texAtlas;
+
+    //Camera objects
     private OrthographicCamera gameCam;
     private Viewport gamePort;
+    private Hud hud;
+
+    //Map Tiles objects
+    private TmxMapLoader maploader;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer renderer;
+
+    //Box objects
+    private World world;
+    private Box2DDebugRenderer b2dr;
+    private LoadMap loadMap;
 
     public BaseScreen(MainClass game)
     {
