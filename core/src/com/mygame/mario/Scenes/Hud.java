@@ -31,7 +31,7 @@ public class Hud {
     private Viewport viewport;
 
     private Integer score;
-    private Integer timer;
+    private Integer time;
     private float countTime;
 
     Label lcount;
@@ -42,7 +42,7 @@ public class Hud {
     Label lmario;
 
     public Hud(SpriteBatch sbatch) {
-        timer = 300;
+        time = 1000;
         countTime = 0;
         score = 0;
 
@@ -50,16 +50,29 @@ public class Hud {
         stage = new Stage(viewport, sbatch);
 
         Table table = new Table();
-        table.top();
+        table.bottom();
         table.setFillParent(true);
 
-        lcount = new Label(String.format("%03d", timer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        lscore = new Label(String.format("%03d", timer),new Label.LabelStyle());
-        Label ltime;
-        Label llevel;
-        Label lworld;
-        Label lmario;
+        //define labels
+        lcount = new Label(String.format("%03d", time), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        lscore = new Label(String.format("%06d", lscore),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        ltime = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        llevel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        lworld = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        lmario = new Label("MARIO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
+        //organize table
 
+            //first line
+        table.add(lmario).expandX().padBottom(5);
+        table.add(lworld).expandX().padBottom(5);
+        table.add(ltime).expandX().padBottom(5);
+            //second line
+        table.row();
+        table.add(lscore).expandX();
+        table.add(llevel).expandX();
+        table.add(lcount).expandX();
+
+        stage.addActor(table);
     }
 }

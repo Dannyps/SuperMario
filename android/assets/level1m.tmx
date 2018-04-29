@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="180" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="27">
+ <tileset firstgid="1" source="tile-supermario.tsx"/>
+ <layer name="background" width="180" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztw7ENAAAMAiDT/z928YmOkNBLqqqqqqqqqqqq+nCj0Akc
+  </data>
+ </layer>
+ <layer name="graphs" width="180" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztlzlOxDAUhj3JNFAgARUaCkgJHWsBNNNCB1xgaihYbwJIwMAtAInlGoDEegtAYvktxdJTyGI7sbNMfulXEnl5z/Hn2GHMrF4dxt7gd8dwoILFtqUuxnYGn1d4jHHqNqLL7vFOHuBHyXejWj/r9rVq3cXw/AGuPuEvR441Wl9Hadvb1DFyPIFPLeR6gBiH8FEJ3kveiuOZqmisPSGPZ/glp3yuEfcGvtWMPwK7knUvEOMSvtKIZXPdFUGyPBdN35ifH/i3R+ZJV2nXXdmUB8/i2+T69y0D/Y/61zC1/HIev0nycEmbrHOqZUdJPOe5r0fxWDZ5eSfQQ0riuQr7Ov/W0m+vTXnsP8/i3Cz2BJ5f02ZSFZbOeUOcFfgciL2dz8mAZHsn4KwlGKH/W2tknA65OiHPtA5X0vklSh4L57mWOZk8Pw+l7FuWgz7E6Y+JtYqyPXjd4r+Cx/R4XkaOK4byHC/pv7+KTPE8iH6n4WHN/lU4mECMyYg4nOVdn+f9jJhOWj9BllV43kC/m4o5bqH+jkSbNqlTVbYFzx0yvlncz8HzmmPmLE/5PM9IMB2MF8XBAsoX4aVAf1E8U5aFVZnuhNSNWz9hLJvkmbO87TuJacpzW3Fux0rCv+BZjK9Ru3aF/AeTcFZu
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object id="15" x="0" y="192" width="864" height="16"/>
+  <object id="16" x="864" y="208" width="192"/>
+  <object id="21" x="864" y="192" width="352" height="16"/>
+  <object id="23" x="1216" y="192" width="560" height="16"/>
+  <object id="24" x="1776" y="192" width="560" height="16"/>
+  <object id="26" x="2336" y="192" width="544" height="16"/>
+ </objectgroup>
+ <objectgroup name="cloud"/>
+ <objectgroup name="coins"/>
+ <objectgroup name="bricks"/>
+ <objectgroup name="pipe"/>
+</map>

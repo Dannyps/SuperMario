@@ -1,6 +1,8 @@
 package com.mygame.mario.Levels;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -37,10 +39,17 @@ public class BaseScreen implements Screen {
     public BaseScreen(MainClass game)
     {
         this.game = game;
+
         gameCam = new OrthographicCamera();
         //gamePort = new StretchViewport(800, 400, gameCam);
         //gamePort = new ScreenViewport(gameCam);
         gamePort = new FitViewport(MainClass.V_WIDTH, MainClass.V_HEIGTH, gameCam);
+
+        hud = new Hud(game.batch);
+
+        /*maploader = new TmxMapLoader();
+        map = maploader.load("level1m.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map, 1 /100);*/
     }
 
     @Override
@@ -50,9 +59,11 @@ public class BaseScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        game.batch.setProjectionMatrix(gameCam.combined);
-        game.batch.begin();
-        game.batch.end();
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
+        //game.batch.setProjectionMatrix(gameCam.combined);
 
 
     }
