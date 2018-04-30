@@ -8,8 +8,9 @@ Projects for the Object Oriented Programming Laboratory (LPOO) class of the Mast
 Made in colaboration with [Christopher Fernandes de Abreu](https://github.com/cfa911).<br>
 
 ## Second Project
-*Meraki* is a word that modern Greeks often use to describe doing something with soul, creativity, or love - when you put *"something of yourself"* into what you're doing, whatever it may be.
-This word inspired us to develop an **Android app**, a to do list. From creating simple tasks to viewing them on the map, it has everything you might need. We used Java, SQLite and Google API's.
+
+Our project goal is to create a Super Mario like game still side-scroller like the original, but with a couple twists. It will have a special boss with a different game mechanic with AI and it's also an Android game. We develop this game with the help of an DP API called Tiled https://www.mapeditor.org/ .
+
 
 **Screenshots**
 
@@ -19,3 +20,7 @@ This word inspired us to develop an **Android app**, a to do list. From creating
 
 
 <img src="https://github.com/mcarolinaSoares/SuperMario/blob/master/UML/SuperMario.jpg" width="800"><br><br>
+
+
+**TESTS**
+We will develop a few tests manly, JUnit tests, like collision detection, load new levels, enemy behavior, Mario mode, score update and characters out-of-bounds.
