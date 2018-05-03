@@ -13,8 +13,8 @@ import com.mygame.mario.Levels.Level3;
 
 public class MainClass extends Game {
 
-	public static final int V_WIDTH = 400;
-	public static final int V_HEIGTH = 208;
+	public static final int V_WIDTH = 800; //500
+	public static final int V_HEIGTH = 400; //500
 	public SpriteBatch batch;
 	
 	@Override

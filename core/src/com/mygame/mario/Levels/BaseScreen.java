@@ -50,8 +50,6 @@ public class BaseScreen implements Screen {
 
         maploader = new TmxMapLoader();
         map = maploader.load("level1m.tmx");
-        //map = maploader.load("C:\\Users\\mcaro\\Documents\\Aulas\\Universidade\\2º Ano\\2º Semestre\\LPOO\\level1m.tmx");
-        //map = new TmxMapLoader().load("../../assets/level1m.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         gameCam.position.set(gamePort.getScreenWidth(), gamePort.getScreenHeight(), 0);
     }
@@ -69,6 +67,7 @@ public class BaseScreen implements Screen {
 
         renderer.render();
         //game.batch.setProjectionMatrix(gameCam.combined);
+        hud.stage.draw();
 
 
     }
@@ -95,14 +94,20 @@ public class BaseScreen implements Screen {
 
     @Override
     public void dispose() {
+        //hud.dispose();
 
     }
 
     public void handleInput(float fl)
     {
-        if(Gdx.input.isTouched())
-        {
-            gameCam.position.x += 70 * fl;
+        if(Gdx.input.isTouched()) {
+            if (Gdx.input.getX() > 0) {
+                gameCam.position.x += 100 * fl;
+            }
+
+            if (Gdx.input.getX() < 0) {
+                gameCam.position.x -= 100 * fl;
+            }
         }
     }
 
