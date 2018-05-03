@@ -2,6 +2,7 @@ package com.mygame.mario.Levels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -47,9 +48,11 @@ public class BaseScreen implements Screen {
 
         hud = new Hud(game.batch);
 
-        /*maploader = new TmxMapLoader();
-        map = maploader.load("level1m.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1 /100);*/
+        maploader = new TmxMapLoader();
+        map = maploader.load("C:\\Users\\mcaro\\Documents\\Aulas\\Universidade\\2º Ano\\2º Semestre\\LPOO\\level1m.tmx");
+        //map = new TmxMapLoader().load("../../assets/level1m.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map);
+        gameCam.position.set(gamePort.getScreenWidth(), gamePort.getScreenHeight(), 0);
     }
 
     @Override
@@ -59,10 +62,11 @@ public class BaseScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        update(delta);
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
+
+        renderer.render();
         //game.batch.setProjectionMatrix(gameCam.combined);
 
 
@@ -91,5 +95,20 @@ public class BaseScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    public void handleInput(float fl)
+    {
+        if(Gdx.input.isTouched())
+        {
+            gameCam.position.x += 70 * fl;
+        }
+    }
+
+    public void update (float fl)
+    {
+        handleInput(fl);
+        gameCam.update();
+        renderer.setView(gameCam);
     }
 }

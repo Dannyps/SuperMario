@@ -12,10 +12,10 @@ import com.mygame.mario.Levels.Level2;
 import com.mygame.mario.Levels.Level3;
 
 public class MainClass extends Game {
+
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGTH = 208;
 	public SpriteBatch batch;
-	//Texture img;
 	
 	@Override
 	public void create () {
@@ -36,9 +36,9 @@ public class MainClass extends Game {
 		batch.end();*/
 	}
 	
-	/*@Override
+	@Override
 	public void dispose () {
+		super.dispose();
 		batch.dispose();
-		img.dispose();
-	}*/
+	}
 }
