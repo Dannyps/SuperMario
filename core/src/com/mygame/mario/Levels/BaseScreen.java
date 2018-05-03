@@ -49,7 +49,8 @@ public class BaseScreen implements Screen {
         hud = new Hud(game.batch);
 
         maploader = new TmxMapLoader();
-        map = maploader.load("C:\\Users\\mcaro\\Documents\\Aulas\\Universidade\\2º Ano\\2º Semestre\\LPOO\\level1m.tmx");
+        map = maploader.load("level1m.tmx");
+        //map = maploader.load("C:\\Users\\mcaro\\Documents\\Aulas\\Universidade\\2º Ano\\2º Semestre\\LPOO\\level1m.tmx");
         //map = new TmxMapLoader().load("../../assets/level1m.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         gameCam.position.set(gamePort.getScreenWidth(), gamePort.getScreenHeight(), 0);
