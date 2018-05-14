@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygame.mario.MainClass;
 import com.mygame.mario.Scenes.Hud;
 import com.mygame.mario.Logic.LoadMap;
+import com.mygame.mario.Scenes.MainMenu;
 
 public class BaseScreen implements Screen {
 
@@ -44,14 +45,14 @@ public class BaseScreen implements Screen {
         gameCam = new OrthographicCamera();
         //gamePort = new StretchViewport(800, 400, gameCam);
         //gamePort = new ScreenViewport(gameCam);
-        gamePort = new FitViewport(MainClass.V_WIDTH, MainClass.V_HEIGTH, gameCam);
+        gamePort = new FitViewport(MainClass.V_WIDTH/MainClass.classico_100, MainClass.V_HEIGTH/ MainClass.classico_100, gameCam);
 
         hud = new Hud(game.batch);
 
         maploader = new TmxMapLoader();
         map = maploader.load("level1m.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
-        gameCam.position.set(gamePort.getScreenWidth(), gamePort.getScreenHeight(), 0);
+        gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
     }
 
     @Override
