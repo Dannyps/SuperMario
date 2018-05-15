@@ -1,6 +1,7 @@
 package com.mygame.mario.Levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
@@ -21,6 +22,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygame.mario.Characters.Mario;
 import com.mygame.mario.MainClass;
 import com.mygame.mario.Scenes.Hud;
 import com.mygame.mario.Logic.LoadMap;
@@ -46,6 +48,9 @@ public class BaseScreen implements Screen {
     private Box2DDebugRenderer b2dr;
     private LoadMap loadMap;
 
+    //Actors
+    private Mario player;
+
     public BaseScreen(MainClass game)
     {
         this.game = game;
@@ -53,16 +58,16 @@ public class BaseScreen implements Screen {
         gameCam = new OrthographicCamera();
         //gamePort = new StretchViewport(800, 400, gameCam);
         //gamePort = new ScreenViewport(gameCam);
-        gamePort = new FitViewport(MainClass.V_WIDTH/MainClass.classico_100, MainClass.V_HEIGTH/ MainClass.classico_100, gameCam);
+        gamePort = new FitViewport(MainClass.V_WIDTH/MainClass.PPM, MainClass.V_HEIGTH/ MainClass.PPM, gameCam);
 
         hud = new Hud(game.batch);
 
         maploader = new TmxMapLoader();
         map = maploader.load("level1m.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map, 1/MainClass.PPM);
         gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
 
-        world = new World (new Vector2(0, 0), true);
+        world = new World (new Vector2(0, -10), true);
         // to recognize pixels map
         b2dr = new Box2DDebugRenderer();
 
@@ -76,9 +81,11 @@ public class BaseScreen implements Screen {
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
+
             body = world.createBody(bodyd);
-            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+
+            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
             body.createFixture(fixtured);
         }
@@ -88,9 +95,11 @@ public class BaseScreen implements Screen {
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
+
             body = world.createBody(bodyd);
-            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+
+            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
             body.createFixture(fixtured);
         }
@@ -100,9 +109,11 @@ public class BaseScreen implements Screen {
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
+
             body = world.createBody(bodyd);
-            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+
+            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
             body.createFixture(fixtured);
         }
@@ -112,9 +123,11 @@ public class BaseScreen implements Screen {
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
+
             body = world.createBody(bodyd);
-            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+
+            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
             body.createFixture(fixtured);
         }
@@ -124,9 +137,11 @@ public class BaseScreen implements Screen {
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
+
             body = world.createBody(bodyd);
-            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+
+            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
             body.createFixture(fixtured);
         }
@@ -136,9 +151,11 @@ public class BaseScreen implements Screen {
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
+
             body = world.createBody(bodyd);
-            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+
+            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
             body.createFixture(fixtured);
         }
@@ -148,9 +165,11 @@ public class BaseScreen implements Screen {
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
+
             body = world.createBody(bodyd);
-            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+
+            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
             body.createFixture(fixtured);
         }
@@ -210,21 +229,30 @@ public class BaseScreen implements Screen {
 
     public void handleInput(float fl)
     {
-        if(Gdx.input.isTouched()) {
-            if (Gdx.input.getX() > 0) {
-                gameCam.position.x += 100 * fl;
-            }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+        }
 
-            if (Gdx.input.getX() < 0) {
-                gameCam.position.x -= 100 * fl;
-            }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.body.getLinearVelocity().x <= 2)
+        {
+            player.body.applyLinearImpulse(new Vector2(0.1f, 0), player.body.getWorldCenter(), true);
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.body.getLinearVelocity().x >= -2)
+        {
+            player.body.applyLinearImpulse(new Vector2(-0.1f, 0), player.body.getWorldCenter(), true);
         }
     }
 
     public void update (float fl)
     {
         handleInput(fl);
+
+        world.step(1/60f, 6, 2);
+
+        gameCam.position.x = player.body.getPosition().x;
         gameCam.update();
+
         renderer.setView(gameCam);
     }
 }
