@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -62,6 +63,7 @@ public class BaseScreen implements Screen {
         gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
 
         world = new World (new Vector2(0, 0), true);
+        // to recognize pixels map
         b2dr = new Box2DDebugRenderer();
 
         BodyDef bodyd = new BodyDef();
@@ -69,9 +71,88 @@ public class BaseScreen implements Screen {
         FixtureDef fixtured = new FixtureDef();
         Body body;
 
+        // recognize empty block
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class))
         {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bodyd.type = BodyDef.BodyType.StaticBody;
+            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            body = world.createBody(bodyd);
+            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+            fixtured.shape = shape;
+            body.createFixture(fixtured);
+        }
 
+        // recognize ground
+        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class))
+        {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bodyd.type = BodyDef.BodyType.StaticBody;
+            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            body = world.createBody(bodyd);
+            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+            fixtured.shape = shape;
+            body.createFixture(fixtured);
+        }
+
+        // recognize bricks
+        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class))
+        {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bodyd.type = BodyDef.BodyType.StaticBody;
+            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            body = world.createBody(bodyd);
+            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+            fixtured.shape = shape;
+            body.createFixture(fixtured);
+        }
+
+        // recognize pipes
+        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class))
+        {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bodyd.type = BodyDef.BodyType.StaticBody;
+            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            body = world.createBody(bodyd);
+            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+            fixtured.shape = shape;
+            body.createFixture(fixtured);
+        }
+
+        // recognize stairs
+        for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class))
+        {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bodyd.type = BodyDef.BodyType.StaticBody;
+            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            body = world.createBody(bodyd);
+            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+            fixtured.shape = shape;
+            body.createFixture(fixtured);
+        }
+
+        // recognize pipe level
+        for (MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class))
+        {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bodyd.type = BodyDef.BodyType.StaticBody;
+            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            body = world.createBody(bodyd);
+            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+            fixtured.shape = shape;
+            body.createFixture(fixtured);
+        }
+
+        // recognize question mark block
+        for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class))
+        {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bodyd.type = BodyDef.BodyType.StaticBody;
+            bodyd.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            body = world.createBody(bodyd);
+            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+            fixtured.shape = shape;
+            body.createFixture(fixtured);
         }
 
     }
@@ -84,11 +165,18 @@ public class BaseScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
+
+        // screen color
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // render game map
         renderer.render();
-        //game.batch.setProjectionMatrix(gameCam.combined);
+
+        // render b2dr
+        b2dr.render(world, gameCam.combined);
+
+        game.batch.setProjectionMatrix(gameCam.combined);
         hud.stage.draw();
 
 
