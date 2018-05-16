@@ -48,6 +48,11 @@ public class BaseScreen implements Screen {
     private Box2DDebugRenderer b2dr;
     private LoadMap loadMap;
 
+    private BodyDef bodyd;
+    private PolygonShape shape;
+    private FixtureDef fixtured;
+    private Body body;
+
     //Actors
     private Mario player;
 
@@ -68,13 +73,26 @@ public class BaseScreen implements Screen {
         gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
 
         world = new World (new Vector2(0, -10), true);
+        player = new Mario(world);
         // to recognize pixels map
         b2dr = new Box2DDebugRenderer();
 
-        BodyDef bodyd = new BodyDef();
+        bodyd = new BodyDef();
+        shape = new PolygonShape();
+        fixtured = new FixtureDef();
+
+        /*BodyDef bodyd = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fixtured = new FixtureDef();
-        Body body;
+        Body body;*/
+
+        recognizeMap(map);
+
+
+
+    }
+
+    void recognizeMap(TiledMap map){
 
         // recognize empty block
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class))
@@ -192,10 +210,11 @@ public class BaseScreen implements Screen {
         // render game map
         renderer.render();
 
-        // render b2dr
+        // render b2dr the update method
         b2dr.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
+
         hud.stage.draw();
 
 

@@ -72,7 +72,7 @@ public class Hud {
         table.row();
         table.add(lscore).expandX();
         table.add(llevel).expandX();
-        table.add(lcount).expandX();
+        table.add(lcount).expand();
 
         stage.addActor(table);
     }
