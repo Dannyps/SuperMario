@@ -48,11 +48,6 @@ public class BaseScreen implements Screen {
     private Box2DDebugRenderer b2dr;
     private LoadMap loadMap;
 
-    private BodyDef bodyd;
-    private PolygonShape shape;
-    private FixtureDef fixtured;
-    private Body body;
-
     //Actors
     private Mario player;
 
@@ -74,125 +69,15 @@ public class BaseScreen implements Screen {
 
         world = new World (new Vector2(0, -10), true);
         player = new Mario(world);
+
         // to recognize pixels map
         b2dr = new Box2DDebugRenderer();
 
-        bodyd = new BodyDef();
-        shape = new PolygonShape();
-        fixtured = new FixtureDef();
-
-        /*BodyDef bodyd = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fixtured = new FixtureDef();
-        Body body;*/
-
-        recognizeMap(map);
-
+        loadMap = new LoadMap(world, map);
 
 
     }
 
-    void recognizeMap(TiledMap map){
-
-        // recognize empty block
-        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
-
-            body = world.createBody(bodyd);
-
-            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
-            fixtured.shape = shape;
-            body.createFixture(fixtured);
-        }
-
-        // recognize ground
-        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
-
-            body = world.createBody(bodyd);
-
-            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
-            fixtured.shape = shape;
-            body.createFixture(fixtured);
-        }
-
-        // recognize bricks
-        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
-
-            body = world.createBody(bodyd);
-
-            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
-            fixtured.shape = shape;
-            body.createFixture(fixtured);
-        }
-
-        // recognize pipes
-        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
-
-            body = world.createBody(bodyd);
-
-            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
-            fixtured.shape = shape;
-            body.createFixture(fixtured);
-        }
-
-        // recognize stairs
-        for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
-
-            body = world.createBody(bodyd);
-
-            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
-            fixtured.shape = shape;
-            body.createFixture(fixtured);
-        }
-
-        // recognize pipe level
-        for (MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
-
-            body = world.createBody(bodyd);
-
-            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
-            fixtured.shape = shape;
-            body.createFixture(fixtured);
-        }
-
-        // recognize question mark block
-        for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
-
-            body = world.createBody(bodyd);
-
-            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
-            fixtured.shape = shape;
-            body.createFixture(fixtured);
-        }
-
-    }
 
     @Override
     public void show() {
@@ -221,8 +106,9 @@ public class BaseScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
-    gamePort.update(width,height);
+    public void resize(int width, int height)
+    {
+        gamePort.update(width,height);
     }
 
     @Override
@@ -242,7 +128,12 @@ public class BaseScreen implements Screen {
 
     @Override
     public void dispose() {
-        //hud.dispose();
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        b2dr.dispose();
+
+        hud.dispose();
 
     }
 

@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygame.mario.MainClass;
 
-public class Hud {
+public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
@@ -75,5 +75,10 @@ public class Hud {
         table.add(lcount).expand();
 
         stage.addActor(table);
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
 }
