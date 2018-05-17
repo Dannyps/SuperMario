@@ -55,6 +55,7 @@ public class BaseScreen implements Screen {
     public BaseScreen(MainClass game)
     {
         this.game = game;
+        this.texAtlas = new TextureAtlas("Mario_friends.pack");
 
         gameCam = new OrthographicCamera();
         //gamePort = new StretchViewport(800, 400, gameCam);
@@ -68,8 +69,8 @@ public class BaseScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map, 1/MainClass.PPM);
         gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
 
-        world = new World (new Vector2(0, -10), true);
-        player = new Mario(world);
+        world = new World (new Vector2(0, -10f), true);
+        player = new Mario(world, this);
 
         // to recognize pixels map
         b2dr = new Box2DDebugRenderer();
@@ -79,6 +80,11 @@ public class BaseScreen implements Screen {
 
     }
 
+
+    public TextureAtlas getTexAtlas()
+    {
+        return texAtlas;
+    }
 
     @Override
     public void show() {
@@ -100,7 +106,11 @@ public class BaseScreen implements Screen {
         b2dr.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
+        game.batch.begin();
+        player.draw(game.batch);
+        game.batch.end();
 
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
 
@@ -160,6 +170,8 @@ public class BaseScreen implements Screen {
         handleInput(fl);
 
         world.step(1/60f, 6, 2);
+
+        player.update(fl);
 
         gameCam.position.x = player.body.getPosition().x;
         gameCam.update();
