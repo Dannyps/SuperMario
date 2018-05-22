@@ -25,6 +25,7 @@ public class Mario extends Sprite {
     private TextureRegion marioRegion;
     private Animation marioRun;
     private Animation marioJump;
+    private Array<TextureRegion> frames;
 
     private float stateTime;
     private boolean runRight;
@@ -39,8 +40,19 @@ public class Mario extends Sprite {
         stateTime = 0;
         runRight = true;
 
-        Array<TextureRegion> frames = new Array<TextureRegion> ();
+        frames = new Array<TextureRegion> ();
+        loadTextures(frames);
 
+        defineMario();
+
+        marioRegion = new TextureRegion(getTexture(), 0, 10, 16, 16);
+        setBounds(0, 0, 16 / MainClass.PPM, 16 / MainClass.PPM);
+        setRegion(marioRegion);
+    }
+
+    //load das texturas para as diferentes animações
+    public void loadTextures(Array<TextureRegion> frames)
+    {
         for(int i= 1; i<4; i++)
         {
             frames.add(new TextureRegion(getTexture(), i*16, 10, 16, 16));
@@ -54,12 +66,6 @@ public class Mario extends Sprite {
         }
         marioJump = new Animation(0.1f, frames);
         frames.clear();
-
-        defineMario();
-
-        marioRegion = new TextureRegion(getTexture(), 0, 10, 16, 16);
-        setBounds(0, 0, 16 / MainClass.PPM, 16 / MainClass.PPM);
-        setRegion(marioRegion);
     }
 
     public State getState()

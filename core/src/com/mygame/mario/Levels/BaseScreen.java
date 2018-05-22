@@ -23,6 +23,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.Mario;
 import com.mygame.mario.Logic.WorldContactListener;
 import com.mygame.mario.MainClass;
@@ -52,6 +53,7 @@ public class BaseScreen implements Screen {
 
     //Actors
     private Mario player;
+    private Goomba goomba;
 
     public BaseScreen(MainClass game)
     {
@@ -72,6 +74,7 @@ public class BaseScreen implements Screen {
 
         world = new World (new Vector2(0, -10f), true);
         player = new Mario(world, this);
+        goomba = new Goomba(world, this);
 
         world.setContactListener(new WorldContactListener());
 
@@ -109,8 +112,10 @@ public class BaseScreen implements Screen {
         b2dr.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
+
         game.batch.begin();
         player.draw(game.batch);
+        goomba.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
