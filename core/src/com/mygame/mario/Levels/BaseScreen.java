@@ -72,6 +72,8 @@ public class BaseScreen implements Screen {
         world = new World (new Vector2(0, -10f), true);
         player = new Mario(world, this);
 
+        world.setContactListener(new WorldContactListener());
+
         // to recognize pixels map
         b2dr = new Box2DDebugRenderer();
 
