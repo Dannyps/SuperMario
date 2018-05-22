@@ -24,6 +24,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygame.mario.Characters.Mario;
+import com.mygame.mario.Logic.WorldContactListener;
 import com.mygame.mario.MainClass;
 import com.mygame.mario.Scenes.Hud;
 import com.mygame.mario.Logic.LoadMap;
