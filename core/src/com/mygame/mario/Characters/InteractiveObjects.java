@@ -2,6 +2,7 @@ package com.mygame.mario.Characters;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -51,5 +52,11 @@ public abstract class InteractiveObjects {
         Filter filter = new Filter();
         filter.categoryBits = filterBit;
         fixture.setFilterData(filter);
+    }
+
+    public TiledMapTileLayer.Cell getCell()
+    {
+        TiledMapTileLayer mapLayer = (TiledMapTileLayer) map.getLayers().get(1);
+        return mapLayer.getCell((int) (body.getPosition().x * MainClass.PPM / 16), (int) (body.getPosition().y * MainClass.PPM / 16));
     }
 }
