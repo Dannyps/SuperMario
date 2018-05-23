@@ -9,6 +9,7 @@ import com.mygame.mario.MainClass;
 public class CoinBrick extends InteractiveObjects{
     public CoinBrick(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
+        fixture.setUserData(this);
 
         setCategoryFilter(MainClass.COIN_BIT);
     }

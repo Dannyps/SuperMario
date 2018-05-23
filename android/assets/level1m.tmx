@@ -31,7 +31,7 @@
  <objectgroup name="cloud"/>
  <objectgroup name="coins"/>
  <objectgroup name="bricks">
-  <object id="31" x="144.841" y="127.75" width="32" height="16"/>
+  <object id="31" x="144.841" y="127.75" width="3  -02" height="16"/>
   <object id="32" x="240.12" y="128.391" width="16" height="16"/>
   <object id="33" x="415.723" y="79.8975" width="32" height="16"/>
   <object id="34" x="400.342" y="127.75" width="64" height="16"/>

@@ -47,6 +47,7 @@ public abstract class InteractiveObjects {
 
     public abstract void HeadColission ();
 
+    //function that destroys the bounds
     public void setCategoryFilter(short filterBit)
     {
         Filter filter = new Filter();
