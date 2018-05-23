@@ -3,9 +3,11 @@ package com.mygame.mario.Characters;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -142,5 +144,12 @@ public class Mario extends Sprite {
 
         fixtured.shape = cshape;
         body.createFixture(fixtured);
+
+        EdgeShape head = new EdgeShape();
+        head.set(new Vector2(-2 / MainClass.PPM, 6 / MainClass.PPM), new Vector2(2 / MainClass.PPM, 6 / MainClass.PPM));
+        fixtured.shape = head;
+        fixtured.isSensor = true;
+
+        body.createFixture(fixtured).setUserData("head");
     }
 }

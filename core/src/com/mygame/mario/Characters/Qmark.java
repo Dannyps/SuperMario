@@ -1,5 +1,6 @@
 package com.mygame.mario.Characters;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -15,6 +16,8 @@ public class Qmark extends InteractiveObjects {
     public Qmark(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
 
+        fixture.setUserData(this);
+
         BodyDef bodyd = new BodyDef();
         FixtureDef fixtured = new FixtureDef();
         PolygonShape shape = new PolygonShape();
@@ -28,6 +31,13 @@ public class Qmark extends InteractiveObjects {
             shape.setAsBox(bounds.getWidth() / 2 / MainClass.PPM, bounds.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
             body.createFixture(fixtured);
+
+    }
+
+    @Override
+    public void HeadColission() {
+
+        Gdx.app.log("QMark", "Colission");
 
     }
 }
