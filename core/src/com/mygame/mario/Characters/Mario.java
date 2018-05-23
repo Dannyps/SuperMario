@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -141,6 +143,8 @@ public class Mario extends Sprite {
         FixtureDef fixtured = new FixtureDef();
         CircleShape cshape = new CircleShape();
         cshape.setRadius(6 / MainClass.PPM);
+        fixtured.filter.categoryBits = MainClass.MARO_BIT;
+        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT;
 
         fixtured.shape = cshape;
         body.createFixture(fixtured);

@@ -27,11 +27,16 @@ public class Bricks extends InteractiveObjects{
             shape.setAsBox(bounds.getWidth() / 2 / MainClass.PPM, bounds.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
             body.createFixture(fixtured);
+
+            setCategoryFilter(MainClass.BRICK_BIT);
+
     }
 
     @Override
-    public void HeadColission() {
+    public void HeadColission()
+    {
         Gdx.app.log("Brick", "Colission");
+        setCategoryFilter(MainClass.DESTROYRD_BIT);
 
     }
 }
