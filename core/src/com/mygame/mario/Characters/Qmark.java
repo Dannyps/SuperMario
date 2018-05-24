@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygame.mario.MainClass;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygame.mario.Scenes.Hud;
 
 public class Qmark extends InteractiveObjects {
 
@@ -41,6 +42,7 @@ public class Qmark extends InteractiveObjects {
         Gdx.app.log("QMark", "Colission");
         setCategoryFilter(MainClass.DESTROYRD_BIT);
         getCell().setTile(null); //erase image object
+        Hud.updateScore(20);
 
     }
 }

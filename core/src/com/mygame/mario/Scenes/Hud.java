@@ -31,16 +31,16 @@ public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
-    private Integer score;
+    private static Integer score;
     private Integer time;
     private float countTime;
 
-    Label lcount;
-    Label lscore;
-    Label ltime;
-    Label llevel;
-    Label lworld;
-    Label lmario;
+    private Label lcount;
+    private static Label lscore;
+    private Label ltime;
+    private Label llevel;
+    private Label lworld;
+    private Label lmario;
 
     public Hud(SpriteBatch sbatch) {
         time = 100;
@@ -56,7 +56,7 @@ public class Hud implements Disposable{
 
         //define labels
         lcount = new Label(String.format("%03d", time), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        lscore = new Label(String.format("%06d", lscore),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        lscore = new Label(String.format("%06d", score),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         ltime = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         llevel = new Label("1-3", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lworld = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -87,6 +87,13 @@ public class Hud implements Disposable{
             countTime = 0;
         }
     }
+
+    public static void updateScore(int value)
+    {
+        score += value;
+        lscore.setText(String.format("%06d", score));
+    }
+
 
     @Override
     public void dispose() {

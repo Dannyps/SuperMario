@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygame.mario.MainClass;
+import com.mygame.mario.Scenes.Hud;
 
 public class Bricks extends InteractiveObjects{
     public Bricks(World world, TiledMap map, Rectangle bounds) {
@@ -38,6 +39,7 @@ public class Bricks extends InteractiveObjects{
         Gdx.app.log("Brick", "Colission");
         setCategoryFilter(MainClass.DESTROYRD_BIT);
         getCell().setTile(null); //erase image object
+        Hud.updateScore(10);
 
     }
 }
