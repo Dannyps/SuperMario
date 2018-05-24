@@ -33,6 +33,7 @@ public class Mario extends Sprite {
 
     private float stateTime;
     private boolean runRight;
+    private boolean marioIsBig;
 
     public Mario (World world, BaseScreen screen)
     {
@@ -52,6 +53,8 @@ public class Mario extends Sprite {
         marioRegion = new TextureRegion(getTexture(), 0, 10, 16, 16);
         setBounds(0, 0, 16 / MainClass.PPM, 16 / MainClass.PPM);
         setRegion(marioRegion);
+
+        marioIsBig = true;
     }
 
     //load das texturas para as diferentes animações
@@ -130,7 +133,15 @@ public class Mario extends Sprite {
         setPosition(body.getPosition().x -getWidth() / 2, body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(fl));
     }
-
+    public boolean marioBig(){
+        return marioIsBig;
+    }
+/*
+    public void grow(){
+        if(!marioBig()){
+            marioIsBig = true;
+        }
+    }*/
     private void defineMario()
     {
         BodyDef bodyd = new BodyDef();
