@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -14,10 +15,15 @@ import com.mygame.mario.Scenes.Hud;
 
 public class Qmark extends InteractiveObjects {
 
+    private static TiledMapTileSet tileSet;
+    private final int EMPTY_BLOCK = 28;
+
     public Qmark(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
 
         fixture.setUserData(this);
+
+        tileSet = map.getTileSets().getTileSet("tile-supermario");
 
         /*BodyDef bodyd = new BodyDef();
         FixtureDef fixtured = new FixtureDef();
@@ -41,8 +47,7 @@ public class Qmark extends InteractiveObjects {
 
         Gdx.app.log("QMark", "Colission");
         setCategoryFilter(MainClass.DESTROYRD_BIT);
-        getCell().setTile(null); //erase image object
+        getCell().setTile(tileSet.getTile(EMPTY_BLOCK)); //change image
         Hud.updateScore(20);
-
     }
 }

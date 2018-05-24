@@ -36,7 +36,7 @@ public class Mario extends Sprite {
 
     public Mario (World world, BaseScreen screen)
     {
-        super(screen.getTexAtlas().findRegion("Sprites_ready/little_mario"));
+        super(screen.getTexAtlas().findRegion("Sprites_ready/big_mario"));
         this.world = world;
 
         currentState = State.Stand;
