@@ -18,7 +18,7 @@ public class Qmark extends InteractiveObjects {
 
         fixture.setUserData(this);
 
-        BodyDef bodyd = new BodyDef();
+        /*BodyDef bodyd = new BodyDef();
         FixtureDef fixtured = new FixtureDef();
         PolygonShape shape = new PolygonShape();
 
@@ -30,7 +30,8 @@ public class Qmark extends InteractiveObjects {
 
             shape.setAsBox(bounds.getWidth() / 2 / MainClass.PPM, bounds.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
-            body.createFixture(fixtured);
+            body.createFixture(fixtured);*/
+        setCategoryFilter(MainClass.BRICK_BIT);
 
     }
 
@@ -38,6 +39,8 @@ public class Qmark extends InteractiveObjects {
     public void HeadColission() {
 
         Gdx.app.log("QMark", "Colission");
+        setCategoryFilter(MainClass.DESTROYRD_BIT);
+        getCell().setTile(null); //erase image object
 
     }
 }

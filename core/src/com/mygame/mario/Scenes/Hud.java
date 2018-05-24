@@ -43,7 +43,7 @@ public class Hud implements Disposable{
     Label lmario;
 
     public Hud(SpriteBatch sbatch) {
-        time = 1000;
+        time = 100;
         countTime = 0;
         score = 0;
 
