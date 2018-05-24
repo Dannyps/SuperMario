@@ -3,6 +3,9 @@ package com.mygame.mario;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,11 +28,25 @@ public class MainClass extends Game {
 	public static final short DESTROYRD_BIT = 16;
 
 	public SpriteBatch batch;
-	
+	public static AssetManager manager;
+
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		manager = new AssetManager();
+		manager.load("Audio/music/mario_music.ogg",Music.class);
+		manager.load("Audio/sounds/breakblock.wav",Sound.class);
+		manager.load("Audio/sounds/bump.wav",Sound.class);
+		manager.load("Audio/sounds/coin.wav",Sound.class);
+		manager.load("Audio/sounds/mariodie.wav",Sound.class);
+		manager.load("Audio/sounds/powerdown.wav",Sound.class);
+		manager.load("Audio/sounds/powerup.wav",Sound.class);
+		manager.load("Audio/sounds/powerup_spawn.wav",Sound.class);
+		manager.load("Audio/sounds/stomp.wav",Sound.class);
+		manager.finishLoading();
 		setScreen(new BaseScreen(this));
+		MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).play();
 		/*setScreen(new Level1(this));
 		setScreen(new Level2(this));
 		setScreen(new Level3(this));*/
