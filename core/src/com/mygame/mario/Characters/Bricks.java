@@ -37,7 +37,7 @@ public class Bricks extends InteractiveObjects{
     {
         Gdx.app.log("Brick", "Colission");
         setCategoryFilter(MainClass.DESTROYRD_BIT);
-        getCell().setTile(null);
+        getCell().setTile(null); //erase image object
 
     }
 }

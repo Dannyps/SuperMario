@@ -180,6 +180,7 @@ public class BaseScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(fl);
+        hud.update(fl);
 
         gameCam.position.x = player.body.getPosition().x;
         gameCam.update();
