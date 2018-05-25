@@ -35,10 +35,10 @@ public class Mario extends Sprite {
     private boolean runRight;
     private boolean marioIsBig;
 
-    public Mario (World world, BaseScreen screen)
+    public Mario (BaseScreen screen)
     {
         super(screen.getTexAtlas().findRegion("Sprites_ready/big_mario"));
-        this.world = world;
+        this.world = screen.getWorld();
 
         currentState = State.Stand;
         lastState = State.Stand;

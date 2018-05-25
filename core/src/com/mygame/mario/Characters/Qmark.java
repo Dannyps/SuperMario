@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygame.mario.Levels.BaseScreen;
 import com.mygame.mario.MainClass;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygame.mario.Scenes.Hud;
@@ -18,8 +19,8 @@ public class Qmark extends InteractiveObjects {
     private static TiledMapTileSet tileSet;
     private final int EMPTY_BLOCK = 28;
 
-    public Qmark(World world, TiledMap map, Rectangle bounds) {
-        super(world, map, bounds);
+    public Qmark(BaseScreen screen, Rectangle bounds) {
+        super(screen, bounds);
 
         fixture.setUserData(this);
 

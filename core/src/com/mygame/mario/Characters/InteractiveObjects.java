@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygame.mario.Levels.BaseScreen;
 import com.mygame.mario.MainClass;
 
 public abstract class InteractiveObjects {
@@ -26,9 +27,9 @@ public abstract class InteractiveObjects {
     protected PolygonShape polygonShape;
     protected Filter filter;
 
-    public InteractiveObjects(World world, TiledMap map, Rectangle bounds) {
-        this.world = world;
-        this.map = map;
+    public InteractiveObjects(BaseScreen screen, Rectangle bounds) {
+        this.world = screen.getWorld();
+        this.map = screen.getMap();
         this.bounds = bounds;
 
         bodyDef = new BodyDef();

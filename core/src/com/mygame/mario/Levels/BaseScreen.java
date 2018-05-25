@@ -73,7 +73,7 @@ public class BaseScreen implements Screen {
         gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
 
         world = new World (new Vector2(0, -10f), true);
-        player = new Mario(world, this);
+        player = new Mario(this);
         goomba = new Goomba(world, this);
 
         world.setContactListener(new WorldContactListener());
@@ -81,7 +81,7 @@ public class BaseScreen implements Screen {
         // to recognize pixels map
         b2dr = new Box2DDebugRenderer();
 
-        loadMap = new LoadMap(world, map);
+        loadMap = new LoadMap(this);
 
 
     }
@@ -128,6 +128,16 @@ public class BaseScreen implements Screen {
     public void resize(int width, int height)
     {
         gamePort.update(width,height);
+    }
+
+    public TiledMap getMap()
+    {
+        return map;
+    }
+
+    public World getWorld()
+    {
+        return world;
     }
 
     @Override

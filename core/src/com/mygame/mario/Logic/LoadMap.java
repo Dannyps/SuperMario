@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygame.mario.Characters.Bricks;
 import com.mygame.mario.Characters.Qmark;
+import com.mygame.mario.Levels.BaseScreen;
 import com.mygame.mario.MainClass;
 
 public class LoadMap {
@@ -22,17 +23,22 @@ public class LoadMap {
     private Qmark qmark;
     private Bricks bricks;
 
-    public LoadMap (World world, TiledMap map)
+    private World world;
+    private TiledMap map;
+
+    public LoadMap (BaseScreen screen)
     {
         bodyd = new BodyDef();
         shape = new PolygonShape();
         fixtured = new FixtureDef();
+        world = screen.getWorld();
+        map = screen.getMap();
 
-        recognizeMap(world, map);
+        recognizeMap(screen);
     }
 
 
-    void recognizeMap(World world, TiledMap map){
+    void recognizeMap(BaseScreen screen){
 
         // recognize empty block
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class))
@@ -66,7 +72,7 @@ public class LoadMap {
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bricks = new Bricks(world, map, rectangle);
+            bricks = new Bricks(screen, rectangle);
         }
 
         // recognize pipes
@@ -115,7 +121,7 @@ public class LoadMap {
         for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            qmark = new Qmark(world, map, rectangle);
+            qmark = new Qmark(screen, rectangle);
         }
 
     }
