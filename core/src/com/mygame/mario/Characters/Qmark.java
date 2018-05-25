@@ -46,10 +46,12 @@ public class Qmark extends InteractiveObjects {
     public void HeadColission() {
 
         Gdx.app.log("QMark", "Colission");
-        //setCategoryFilter(MainClass.BRICK_BIT);
-        if(getCell().getTile().equals(MainClass.BRICK_BIT)) {
+        if((getCell().getTile().getId() == 25) || (getCell().getTile().getId() == 27)) {
             Hud.updateScore(20);
         }
+
+        else
+            Hud.updateScore(0);
 
         getCell().setTile(tileSet.getTile(EMPTY_BLOCK)); //change image
 

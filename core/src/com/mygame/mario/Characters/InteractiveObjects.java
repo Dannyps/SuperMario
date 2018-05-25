@@ -24,6 +24,7 @@ public abstract class InteractiveObjects {
     protected BodyDef bodyDef;
     protected FixtureDef fixtureDef;
     protected PolygonShape polygonShape;
+    protected Filter filter;
 
     public InteractiveObjects(World world, TiledMap map, Rectangle bounds) {
         this.world = world;
@@ -43,14 +44,20 @@ public abstract class InteractiveObjects {
         fixtureDef.shape = polygonShape;
         fixture = body.createFixture(fixtureDef);
 
+        filter = new Filter();
+
     }
 
     public abstract void HeadColission ();
 
+    public Filter getCategoryFilter()
+    {
+        return fixture.getFilterData();
+    }
+
     //function that destroys the object bounds
     public void setCategoryFilter(short filterBit)
     {
-        Filter filter = new Filter();
         filter.categoryBits = filterBit;
         fixture.setFilterData(filter);
     }
