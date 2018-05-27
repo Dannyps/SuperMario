@@ -49,10 +49,9 @@ public class MainClass extends Game {
 		manager.load("Audio/sounds/stomp.wav",Sound.class);
 		manager.finishLoading();
 
-		//setScreen(new MainMenu(this));
-		setScreen(new BaseScreen(this));
+		setScreen(new MainMenu(this));
 
-		MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).play();
+		//MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).play();
 		/*setScreen(new Level1(this));
 		setScreen(new Level2(this));
 		setScreen(new Level3(this));*/
