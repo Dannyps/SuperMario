@@ -128,10 +128,15 @@ public class BaseScreen implements Screen {
         Gdx.input.setInputProcessor(hud.stage);
 
         // change if click up and not stop click up
-        buttonUp.addListener(new ClickListener(){
+        buttonUp.addListener(new InputListener(){
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if(!((player.currentState.equals(Mario.State.Jump)) || (player.currentState.equals(Mario.State.Fall)))) {
+                    player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+                    return true;
+                }
+
+                return true;
             }
         });
 
@@ -230,8 +235,10 @@ public class BaseScreen implements Screen {
             player.body.applyLinearImpulse(new Vector2(-0.1f, 0), player.body.getWorldCenter(), true);
         }*/
 
+        //&& (!(Gdx.input.isButtonPressed((int) ((int) buttonUp.getX() + buttonUp.getWidth())))
+
         //for android
-        if(Gdx.input.isTouched())
+        if(Gdx.input.isTouched() && (!(buttonUp.isPressed())))
         {
             //rigth one
             if ((Gdx.input.getX() > Gdx.graphics.getWidth() / 2) && (player.body.getLinearVelocity().x <= 2))
