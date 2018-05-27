@@ -65,7 +65,7 @@ public class Goomba extends Enemys {
     public void update(float fl) {
         timeGoomba += fl;
         setPosition(body.getPosition().x - getRegionWidth() / 2, body.getPosition().y - getHeight() / 2);
-        //setRegion((Texture) goombaRun.getKeyFrame(timeGoomba));
+        //the problem is here
         setRegion(goombaRun.getKeyFrame(timeGoomba, true));
     }
 }
