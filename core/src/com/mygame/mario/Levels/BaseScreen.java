@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygame.mario.Characters.Enemys;
 import com.mygame.mario.Characters.Goomba;
@@ -73,14 +74,16 @@ public class BaseScreen implements Screen {
         gameCam = new OrthographicCamera();
         //gamePort = new StretchViewport(800, 400, gameCam);
         //gamePort = new ScreenViewport(gameCam);
-        gamePort = new FitViewport(MainClass.V_WIDTH/MainClass.PPM, MainClass.V_HEIGTH/ MainClass.PPM, gameCam);
+        //gamePort = new FitViewport(MainClass.V_WIDTH/MainClass.PPM, MainClass.V_HEIGTH/ MainClass.PPM, gameCam);
+        gamePort = new StretchViewport(3, 2, gameCam);
 
         hud = new Hud(game.batch);
 
         maploader = new TmxMapLoader();
         map = level();
         renderer = new OrthogonalTiledMapRenderer(map, 1/MainClass.PPM);
-        gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
+        //gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
+        gameCam.position.set(0, 1, 0);
 
         buttonUp = new TextButton("Jump", new Skin(Gdx.files.internal("Skins/flat-earth/skin/flat-earth-ui.json")));
         buttonFire = new TextButton("Shots", new Skin(Gdx.files.internal("Skins/flat-earth/skin/flat-earth-ui.json")));
@@ -145,7 +148,7 @@ public class BaseScreen implements Screen {
         update(delta);
 
         // screen color
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // render game map
