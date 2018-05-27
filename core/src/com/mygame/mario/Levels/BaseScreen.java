@@ -62,7 +62,7 @@ public class BaseScreen implements Screen {
 
     //buttons
     private TextButton buttonUp;
-    //private TextButton buttonFire;
+    private TextButton buttonFire;
 
     public BaseScreen(MainClass game)
     {
@@ -82,12 +82,8 @@ public class BaseScreen implements Screen {
         gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
 
         buttonUp = new TextButton("Jump", new Skin(Gdx.files.internal("Skins/flat-earth/skin/flat-earth-ui.json")));
-        //buttonUp.getLabel().setFontScale(3.0f,3.0f);
-        //buttonUp.getLabel().setSize(50.0f,50.0f);
-        buttonUp.setSize(50, 50);
-        buttonUp.setPosition(100, 100);
-        hud.stage.addActor(buttonUp);
-        Gdx.input.setInputProcessor(hud.stage);
+        buttonFire = new TextButton("Shots", new Skin(Gdx.files.internal("Skins/flat-earth/skin/flat-earth-ui.json")));
+        loadButtons(buttonUp, buttonFire);
 
         world = new World (new Vector2(0, -10f), true);
         player = new Mario(this);
@@ -99,13 +95,6 @@ public class BaseScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         loadMap = new LoadMap(this);
-
-        buttonUp.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
-            }
-        });
 
     }
 
@@ -121,6 +110,28 @@ public class BaseScreen implements Screen {
         TiledMap map;
         map = maploader.load("level1m.tmx");
         return map;
+    }
+
+    //function that specifies buttons
+    public void loadButtons(TextButton buttonOne, TextButton buttonTwo)
+    {
+        //To buttonUp
+        //buttonUp.getLabel().setFontScale(3.0f,3.0f);
+        //buttonUp.getLabel().setSize(50.0f,50.0f);
+        buttonUp.setSize(50, 50);
+        buttonUp.setPosition(100, 100);
+        hud.stage.addActor(buttonUp);
+        Gdx.input.setInputProcessor(hud.stage);
+
+        // change if click up and not stop click up
+        buttonUp.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+            }
+        });
+
+        //To buttonFire
     }
 
     @Override

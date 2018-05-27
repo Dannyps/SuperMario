@@ -8,7 +8,7 @@ import java.awt.Label;
 public class MainMenu implements Screen {
 
     private MainClass menu;
-    
+
     private Label NewGame;
     private Label Play;
 
