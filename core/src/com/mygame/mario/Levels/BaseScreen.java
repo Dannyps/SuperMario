@@ -28,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygame.mario.Characters.Enemys;
 import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.Mario;
 import com.mygame.mario.Logic.WorldContactListener;
@@ -87,7 +88,7 @@ public class BaseScreen implements Screen {
 
         world = new World (new Vector2(0, -10f), true);
         player = new Mario(this);
-        goomba = new Goomba(world, this);
+        goomba = new Goomba(this, 32f, 32f);
 
         world.setContactListener(new WorldContactListener());
 
@@ -253,6 +254,7 @@ public class BaseScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(fl);
+        goomba.update(fl);
         hud.update(fl);
 
         gameCam.position.x = player.body.getPosition().x;

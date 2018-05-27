@@ -86,6 +86,7 @@ public class LoadMap {
 
             shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
+            fixtured.filter.categoryBits = MainClass.OBJECT_BIT;
             body.createFixture(fixtured);
         }
 
