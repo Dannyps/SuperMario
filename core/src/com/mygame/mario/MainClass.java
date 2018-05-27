@@ -13,6 +13,7 @@ import com.mygame.mario.Levels.BaseScreen;
 import com.mygame.mario.Levels.Level1;
 import com.mygame.mario.Levels.Level2;
 import com.mygame.mario.Levels.Level3;
+import com.mygame.mario.Scenes.MainMenu;
 
 public class MainClass extends Game {
 
@@ -45,7 +46,10 @@ public class MainClass extends Game {
 		manager.load("Audio/sounds/powerup_spawn.wav",Sound.class);
 		manager.load("Audio/sounds/stomp.wav",Sound.class);
 		manager.finishLoading();
+
+		//setScreen(new MainMenu(this));
 		setScreen(new BaseScreen(this));
+
 		MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).play();
 		/*setScreen(new Level1(this));
 		setScreen(new Level2(this));

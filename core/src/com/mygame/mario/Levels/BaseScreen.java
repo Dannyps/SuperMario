@@ -21,6 +21,11 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygame.mario.Characters.Goomba;
@@ -55,6 +60,10 @@ public class BaseScreen implements Screen {
     private Mario player;
     private Goomba goomba;
 
+    //buttons
+    private TextButton buttonUp;
+    //private TextButton buttonFire;
+
     public BaseScreen(MainClass game)
     {
         this.game = game;
@@ -68,9 +77,17 @@ public class BaseScreen implements Screen {
         hud = new Hud(game.batch);
 
         maploader = new TmxMapLoader();
-        map = maploader.load("level1m.tmx");
+        map = level();
         renderer = new OrthogonalTiledMapRenderer(map, 1/MainClass.PPM);
         gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
+
+        buttonUp = new TextButton("Jump", new Skin(Gdx.files.internal("Skins/flat-earth/skin/flat-earth-ui.json")));
+        //buttonUp.getLabel().setFontScale(3.0f,3.0f);
+        //buttonUp.getLabel().setSize(50.0f,50.0f);
+        buttonUp.setSize(50, 50);
+        buttonUp.setPosition(100, 100);
+        hud.stage.addActor(buttonUp);
+        Gdx.input.setInputProcessor(hud.stage);
 
         world = new World (new Vector2(0, -10f), true);
         player = new Mario(this);
@@ -83,6 +100,12 @@ public class BaseScreen implements Screen {
 
         loadMap = new LoadMap(this);
 
+        buttonUp.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+            }
+        });
 
     }
 
@@ -90,6 +113,14 @@ public class BaseScreen implements Screen {
     public TextureAtlas getTexAtlas()
     {
         return texAtlas;
+    }
+
+    //function that load levels
+    public TiledMap level()
+    {
+        TiledMap map;
+        map = maploader.load("level1m.tmx");
+        return map;
     }
 
     @Override
@@ -116,6 +147,7 @@ public class BaseScreen implements Screen {
         game.batch.begin();
         player.draw(game.batch);
         goomba.draw(game.batch);
+        //buttonUp.draw(game.batch, 1);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -168,7 +200,8 @@ public class BaseScreen implements Screen {
 
     public void handleInput(float fl)
     {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+        // for desktop
+        /*if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
         }
 
@@ -180,7 +213,26 @@ public class BaseScreen implements Screen {
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.body.getLinearVelocity().x >= -2)
         {
             player.body.applyLinearImpulse(new Vector2(-0.1f, 0), player.body.getWorldCenter(), true);
+        }*/
+
+        //for android
+        if(Gdx.input.isTouched())
+        {
+            //rigth one
+            if ((Gdx.input.getX() > Gdx.graphics.getWidth() / 2) && (player.body.getLinearVelocity().x <= 2))
+            {
+                player.body.applyLinearImpulse(new Vector2(0.1f, 0), player.body.getWorldCenter(), true);
+            }
+
+            //left one
+            if((Gdx.input.getX() < Gdx.graphics.getWidth() / 2) && (player.body.getLinearVelocity().x >= -2))
+             {
+                 player.body.applyLinearImpulse(new Vector2(-0.1f, 0), player.body.getWorldCenter(), true);
+             }
+
+            //up one
         }
+
     }
 
     public void update (float fl)
