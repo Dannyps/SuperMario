@@ -25,18 +25,19 @@ public class Goomba extends Enemys {
         //screen.getTexAtlas().findRegion("Sprites_ready/goomba_edited")
 
         frames = new Array<TextureRegion> ();
-        loadTextures(frames);
+        loadTextures();
         timeGoomba = 0;
 
         setBounds(getX(), getY(), 16 / MainClass.PPM, 16 / MainClass.PPM);
     }
 
 
-    public void loadTextures(Array<TextureRegion> frames) {
+    public void loadTextures() {
 
-        for(int i = 0; i < 2; i++)
+        for(int i = 1; i < 3; i++)
         {
-            frames.add(new TextureRegion(screen.getTexAtlas().findRegion("Sprites_ready/goomba_edited"), i*16, 10, 16, 16));
+            //region loaded
+            frames.add(new TextureRegion(screen.getTexAtlas().findRegion("Sprites_ready/goomba_edited"), i*16, 0, 16, 16));
         }
         goombaRun = new Animation(0.4f, frames);
         //frames.clear();
@@ -45,6 +46,7 @@ public class Goomba extends Enemys {
     @Override
     protected void defineEnenmy() {
         BodyDef bodyd = new BodyDef();
+        //goomba ta a frente do mario
         bodyd.position.set(12/ MainClass.PPM, 12/ MainClass.PPM);
         bodyd.type = BodyDef.BodyType.DynamicBody;
 
@@ -64,6 +66,7 @@ public class Goomba extends Enemys {
 
     public void update(float fl) {
         timeGoomba += fl;
+        //sprite a movimentar-se
         setPosition(body.getPosition().x - getRegionWidth() / 2, body.getPosition().y - getHeight() / 2);
         //the problem is here
         setRegion(goombaRun.getKeyFrame(timeGoomba, true));

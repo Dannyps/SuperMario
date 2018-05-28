@@ -51,25 +51,16 @@ public class MainClass extends Game {
 
 		setScreen(new MainMenu(this));
 
-		//MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).play();
-		/*setScreen(new Level1(this));
-		setScreen(new Level2(this));
-		setScreen(new Level3(this));*/
+		MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).play();
 	}
 
 	@Override
 	public void render () {
 		super.render();
-		/*Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();*/
 	}
 	
 	@Override
 	public void dispose () {
 		super.dispose();
-		//batch.dispose();
 	}
 }

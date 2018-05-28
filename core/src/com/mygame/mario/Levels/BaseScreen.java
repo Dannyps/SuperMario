@@ -87,7 +87,7 @@ public class BaseScreen implements Screen {
 
         buttonUp = new TextButton("Jump", new Skin(Gdx.files.internal("Skins/flat-earth/skin/flat-earth-ui.json")));
         buttonFire = new TextButton("Shots", new Skin(Gdx.files.internal("Skins/flat-earth/skin/flat-earth-ui.json")));
-        loadButtons(buttonUp, buttonFire);
+        loadButtons();
 
         world = new World (new Vector2(0, -10f), true);
         player = new Mario(this);
@@ -117,7 +117,7 @@ public class BaseScreen implements Screen {
     }
 
     //function that specifies buttons
-    public void loadButtons(TextButton buttonOne, TextButton buttonTwo)
+    public void loadButtons()
     {
         //To buttonUp
         //buttonUp.getLabel().setFontScale(3.0f,3.0f);
@@ -127,10 +127,11 @@ public class BaseScreen implements Screen {
         hud.stage.addActor(buttonUp);
         Gdx.input.setInputProcessor(hud.stage);
 
-        // change if click up and not stop click up
+        // if touched jump
         buttonUp.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                //only jump if Mario is on the ground
                 if(!((player.currentState.equals(Mario.State.Jump)) || (player.currentState.equals(Mario.State.Fall)))) {
                     player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
                     return true;
@@ -141,6 +142,7 @@ public class BaseScreen implements Screen {
         });
 
         //To buttonFire
+        //TO DO
     }
 
     @Override
@@ -167,7 +169,6 @@ public class BaseScreen implements Screen {
         game.batch.begin();
         player.draw(game.batch);
         goomba.draw(game.batch);
-        //buttonUp.draw(game.batch, 1);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -252,7 +253,6 @@ public class BaseScreen implements Screen {
                  player.body.applyLinearImpulse(new Vector2(-0.1f, 0), player.body.getWorldCenter(), true);
              }
 
-            //up one
         }
 
     }

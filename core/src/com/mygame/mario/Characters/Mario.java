@@ -46,7 +46,7 @@ public class Mario extends Sprite {
         runRight = true;
 
         frames = new Array<TextureRegion> ();
-        loadTextures(frames);
+        loadTextures();
 
         defineMario();
 
@@ -58,7 +58,7 @@ public class Mario extends Sprite {
     }
 
     //load das texturas para as diferentes animações
-    public void loadTextures(Array<TextureRegion> frames)
+    public void loadTextures()
     {
         for(int i= 1; i<4; i++)
         {
