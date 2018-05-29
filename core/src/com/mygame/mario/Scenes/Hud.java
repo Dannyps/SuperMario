@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import java.awt.Color;
 import java.awt.Label;*/
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -32,7 +32,7 @@ public class Hud implements Disposable{
     private Viewport viewport;
 
     private static Integer score;
-    private Integer time;
+    private Integer time; //InGame time
     private float countTime;
 
     private Label lcount;
@@ -43,11 +43,11 @@ public class Hud implements Disposable{
     private Label lmario;
 
     public Hud(SpriteBatch sbatch) {
-        time = 100;
+        time = 300;
         countTime = 0;
         score = 0;
 
-        viewport = new FitViewport(MainClass.V_WIDTH, MainClass.V_HEIGTH, new OrthographicCamera());
+        viewport = new FitViewport(MainClass.V_WIDTH, MainClass.V_HEIGTH, new OrthographicCamera()); //Creates camera with set dimensions
         stage = new Stage(viewport, sbatch);
 
         Table table = new Table();
@@ -58,7 +58,7 @@ public class Hud implements Disposable{
         lcount = new Label(String.format("%03d", time), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lscore = new Label(String.format("%06d", score),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         ltime = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        llevel = new Label("1-3", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        llevel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lworld = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lmario = new Label("MARIO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
@@ -70,10 +70,11 @@ public class Hud implements Disposable{
         table.add(ltime).expandX().padBottom(5);
             //second line
         table.row();
-        table.add(lscore).expandX();
-        table.add(llevel).expandX();
-        table.add(lcount).expand();
+        table.add(lscore).expandX().padBottom(350);
+        table.add(llevel).expandX().padBottom(350);
+        table.add(lcount).expandX().padBottom(350);
 
+        MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).play();
         stage.addActor(table);
     }
 
@@ -98,5 +99,6 @@ public class Hud implements Disposable{
     @Override
     public void dispose() {
         stage.dispose();
+
     }
 }

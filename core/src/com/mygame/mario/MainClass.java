@@ -1,18 +1,10 @@
 package com.mygame.mario;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygame.mario.Levels.BaseScreen;
-import com.mygame.mario.Levels.Level1;
-import com.mygame.mario.Levels.Level2;
-import com.mygame.mario.Levels.Level3;
 import com.mygame.mario.Scenes.MainMenu;
 
 public class MainClass extends Game {
@@ -29,7 +21,7 @@ public class MainClass extends Game {
 	public static final short DESTROYRD_BIT = 16;
 	public static final short OBJECT_BIT = 32;
 	public static final short ENEMY_BIT = 64;
-
+	public static final short ENEMY_HEAD_BIT = 128;
 	public SpriteBatch batch;
 	public static AssetManager manager;
 
@@ -51,11 +43,12 @@ public class MainClass extends Game {
 
 		setScreen(new MainMenu(this));
 
-		MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).play();
+
 	}
 
 	@Override
 	public void render () {
+
 		super.render();
 	}
 	

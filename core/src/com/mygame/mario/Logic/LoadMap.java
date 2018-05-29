@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygame.mario.Characters.Bricks;
+import com.mygame.mario.Characters.Coin;
 import com.mygame.mario.Characters.Qmark;
 import com.mygame.mario.Levels.BaseScreen;
 import com.mygame.mario.MainClass;
@@ -22,6 +23,7 @@ public class LoadMap {
     private Body body;
     private Qmark qmark;
     private Bricks bricks;
+    private Coin coin;
 
     private World world;
     private TiledMap map;
@@ -124,6 +126,34 @@ public class LoadMap {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             qmark = new Qmark(screen, rectangle);
         }
+    /*
+        // recognize goombas Por agora não funciona
+        for (MapObject object : map.getLayers().get(11).getObjects().getByType(RectangleMapObject.class))
+        {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bodyd.type = BodyDef.BodyType.KinematicBody;
+            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
 
+            body = world.createBody(bodyd);
+
+            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
+            fixtured.shape = shape;
+            body.createFixture(fixtured);
+        }
+
+        // recognize plants
+        for (MapObject object : map.getLayers().get(12).getObjects().getByType(RectangleMapObject.class))
+        {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bodyd.type = BodyDef.BodyType.KinematicBody;
+            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
+
+            body = world.createBody(bodyd);
+
+            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
+            fixtured.shape = shape;
+            body.createFixture(fixtured);
+        }
+*/
     }
 }

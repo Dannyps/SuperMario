@@ -3,79 +3,79 @@ Mario_friends.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Sprites_ready/big_mario
+big_mario
   rotate: false
   xy: 1, 29
   size: 336, 32
   orig: 336, 32
   offset: 0, 0
   index: -1
-Sprites_ready/big_mario_special
+big_mario_special
   rotate: false
   xy: 339, 29
   size: 336, 32
   orig: 336, 32
   offset: 0, 0
   index: -1
-Sprites_ready/little_mario
+little_mario
   rotate: false
   xy: 1, 11
   size: 224, 16
   orig: 224, 16
   offset: 0, 0
   index: -1
-Sprites_ready/little_mario_special
+little_mario_special
   rotate: false
   xy: 677, 45
   size: 224, 16
   orig: 224, 16
   offset: 0, 0
   index: -1
-Sprites_ready/coin
+coin
   rotate: false
-  xy: 903, 41
-  size: 120, 20
-  orig: 120, 20
+  xy: 227, 7
+  size: 101, 20
+  orig: 101, 20
   offset: 0, 0
   index: -1
-Sprites_ready/goomba
+goomba
   rotate: false
-  xy: 227, 11
+  xy: 903, 45
   size: 48, 16
   orig: 48, 16
   offset: 0, 0
   index: -1
-Sprites_ready/goomba_edited
+goomba_edited
   rotate: false
-  xy: 277, 11
+  xy: 330, 11
   size: 48, 16
   orig: 48, 16
   offset: 0, 0
   index: -1
-Sprites_ready/plant
+plant
   rotate: false
-  xy: 327, 3
+  xy: 953, 37
   size: 38, 24
   orig: 38, 24
   offset: 0, 0
   index: -1
-Sprites_ready/Squid
+Squid
   rotate: false
-  xy: 367, 1
+  xy: 380, 1
   size: 34, 26
   orig: 34, 26
   offset: 0, 0
   index: -1
-Sprites_ready/fireball
+fireball
   rotate: false
-  xy: 677, 35
+  xy: 1, 1
   size: 32, 8
   orig: 32, 8
   offset: 0, 0
   index: -1
-Sprites_ready/mushroom
+mushroom
   rotate: false
-  xy: 403, 11
+  xy: 993, 45
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

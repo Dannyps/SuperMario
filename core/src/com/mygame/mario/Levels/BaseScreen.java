@@ -1,42 +1,28 @@
 package com.mygame.mario.Levels;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygame.mario.Characters.Enemys;
 import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.Mario;
+import com.mygame.mario.Logic.LoadMap;
 import com.mygame.mario.Logic.WorldContactListener;
 import com.mygame.mario.MainClass;
 import com.mygame.mario.Scenes.Hud;
-import com.mygame.mario.Logic.LoadMap;
-import com.mygame.mario.Scenes.MainMenu;
 
 public class BaseScreen implements Screen {
 
@@ -80,7 +66,7 @@ public class BaseScreen implements Screen {
         hud = new Hud(game.batch);
 
         maploader = new TmxMapLoader();
-        map = level();
+        map = level("level1m.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/MainClass.PPM);
         //gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
         gameCam.position.set(0, 1, 0);
@@ -91,7 +77,7 @@ public class BaseScreen implements Screen {
 
         world = new World (new Vector2(0, -10f), true);
         player = new Mario(this);
-        goomba = new Goomba(this, 32f, 32f);
+        goomba = new Goomba(this,25,25);
 
         world.setContactListener(new WorldContactListener());
 
@@ -109,10 +95,10 @@ public class BaseScreen implements Screen {
     }
 
     //function that load levels
-    public TiledMap level()
+    public TiledMap level(String level)
     {
         TiledMap map;
-        map = maploader.load("level1m.tmx");
+        map = maploader.load(level);
         return map;
     }
 
@@ -239,7 +225,7 @@ public class BaseScreen implements Screen {
         //&& (!(Gdx.input.isButtonPressed((int) ((int) buttonUp.getX() + buttonUp.getWidth())))
 
         //for android
-        if(Gdx.input.isTouched() && (!(buttonUp.isPressed())))
+        if(Gdx.input.isTouched()  && (!(buttonUp.isPressed())))
         {
             //rigth one
             if ((Gdx.input.getX() > Gdx.graphics.getWidth() / 2) && (player.body.getLinearVelocity().x <= 2))
@@ -262,9 +248,9 @@ public class BaseScreen implements Screen {
         handleInput(fl);
 
         world.step(1/60f, 6, 2);
-
-        player.update(fl);
         goomba.update(fl);
+        player.update(fl);
+
         hud.update(fl);
 
         gameCam.position.x = player.body.getPosition().x;

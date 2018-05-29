@@ -8,11 +8,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.mygame.mario.Levels.BaseScreen;
 import com.mygame.mario.MainClass;
@@ -37,7 +34,7 @@ public class Mario extends Sprite {
 
     public Mario (BaseScreen screen)
     {
-        super(screen.getTexAtlas().findRegion("Sprites_ready/big_mario"));
+        super(screen.getTexAtlas().findRegion("big_mario"));
         this.world = screen.getWorld();
 
         currentState = State.Stand;
@@ -51,6 +48,7 @@ public class Mario extends Sprite {
         defineMario();
 
         marioRegion = new TextureRegion(getTexture(), 0, 10, 16, 16);
+
         setBounds(0, 0, 16 / MainClass.PPM, 16 / MainClass.PPM);
         setRegion(marioRegion);
 
@@ -156,7 +154,7 @@ public class Mario extends Sprite {
         cshape.setRadius(6 / MainClass.PPM);
 
         fixtured.filter.categoryBits = MainClass.MARO_BIT;
-        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.ENEMY_BIT | MainClass.OBJECT_BIT;
+        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.ENEMY_BIT | MainClass.OBJECT_BIT | MainClass.ENEMY_HEAD_BIT;
 
         fixtured.shape = cshape;
         body.createFixture(fixtured);
