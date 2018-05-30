@@ -77,7 +77,7 @@ public class BaseScreen implements Screen {
 
         world = new World (new Vector2(0, -10f), true);
         player = new Mario(this);
-        goomba = new Goomba(this,25,25);
+        goomba = new Goomba(this,100,100);
 
         world.setContactListener(new WorldContactListener());
 

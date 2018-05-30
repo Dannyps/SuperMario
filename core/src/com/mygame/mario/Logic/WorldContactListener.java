@@ -26,12 +26,15 @@ public class WorldContactListener implements ContactListener {
             Fixture head = fixA.getUserData() == "head" ? fixA : fixB;
             Fixture object = head == fixA ? fixB : fixA;
 
-            if(object.getUserData() instanceof Bricks || object.getUserData() instanceof Coin)
+            if(object.getUserData() instanceof Coin)
             {
                 ((InteractiveObjects) object.getUserData()).HeadColission();
                 MainClass.manager.get("Audio/sounds/coin.wav",Sound.class).play();
             }
-
+            else if( object.getUserData() instanceof Bricks){
+                ((InteractiveObjects) object.getUserData()).HeadColission();
+                MainClass.manager.get("Audio/sounds/breakblock.wav",Sound.class).play();
+            }
             else if(object.getUserData() instanceof InteractiveObjects)
             {
                 ((InteractiveObjects) object.getUserData()).HeadColission();

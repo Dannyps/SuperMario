@@ -1,5 +1,6 @@
 package com.mygame.mario.Characters;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,6 +17,7 @@ import com.mygame.mario.MainClass;
 
 public class Mario extends Sprite {
 
+    private final BaseScreen screen;
     public World world;
     public Body body;
 
@@ -32,27 +34,34 @@ public class Mario extends Sprite {
     private boolean runRight;
     private boolean marioIsBig;
 
+
+
+
     public Mario (BaseScreen screen)
     {
-        super(screen.getTexAtlas().findRegion("big_mario"));
+        super(screen.getTexAtlas().findRegion("little_mario_special"));
+        this.screen = screen;
         this.world = screen.getWorld();
+    currentState = State.Stand;
+    lastState = State.Stand;
+    stateTime = 0;
+    runRight = true;
 
-        currentState = State.Stand;
-        lastState = State.Stand;
-        stateTime = 0;
-        runRight = true;
+    frames = new Array<TextureRegion> ();
+    loadTextures();
 
-        frames = new Array<TextureRegion> ();
-        loadTextures();
+    defineMario();
 
-        defineMario();
+    marioRegion = new TextureRegion(getTextureRegion(), 0, 0, 16, 16);
 
-        marioRegion = new TextureRegion(getTexture(), 0, 10, 16, 16);
+    setBounds(0, 0, 16 / MainClass.PPM, 16 / MainClass.PPM);
+    setRegion(marioRegion);
 
-        setBounds(0, 0, 16 / MainClass.PPM, 16 / MainClass.PPM);
-        setRegion(marioRegion);
+    marioIsBig = true;
+}
 
-        marioIsBig = true;
+    public TextureRegion getTextureRegion() {
+        return screen.getTexAtlas().findRegion("little_mario_special");
     }
 
     //load das texturas para as diferentes animações
@@ -60,14 +69,14 @@ public class Mario extends Sprite {
     {
         for(int i= 1; i<4; i++)
         {
-            frames.add(new TextureRegion(getTexture(), i*16, 10, 16, 16));
+            frames.add(new TextureRegion(getTextureRegion(), i*16, 0, 16, 16));
         }
         marioRun = new Animation(0.1f, frames);
         frames.clear();
 
         for(int i= 4; i<6; i++)
         {
-            frames.add(new TextureRegion(getTexture(), i*16, 10, 16, 16));
+            frames.add(new TextureRegion(getTextureRegion(), i*16, 0, 16, 16));
         }
         marioJump = new Animation(0.1f, frames);
         frames.clear();
@@ -134,12 +143,12 @@ public class Mario extends Sprite {
     public boolean marioBig(){
         return marioIsBig;
     }
-/*
-    public void grow(){
-        if(!marioBig()){
-            marioIsBig = true;
-        }
-    }*/
+    /*
+        public void grow(){
+            if(!marioBig()){
+                marioIsBig = true;
+            }
+        }*/
     private void defineMario()
     {
         BodyDef bodyd = new BodyDef();
