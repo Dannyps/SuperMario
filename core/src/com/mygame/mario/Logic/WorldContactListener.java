@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygame.mario.Characters.Bricks;
 import com.mygame.mario.Characters.Coin;
+import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.InteractiveObjects;
 import com.mygame.mario.MainClass;
 
@@ -21,17 +22,21 @@ public class WorldContactListener implements ContactListener {
         //an object
         Fixture fixB = contact.getFixtureB();
 
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits; // mario colides with head goomba
+
+
         if(fixA.getUserData() == "head" || fixB.getUserData() == "head")
         {
             Fixture head = fixA.getUserData() == "head" ? fixA : fixB;
             Fixture object = head == fixA ? fixB : fixA;
+
 
             if(object.getUserData() instanceof Coin)
             {
                 ((InteractiveObjects) object.getUserData()).HeadColission();
                 MainClass.manager.get("Audio/sounds/coin.wav",Sound.class).play();
             }
-            else if( object.getUserData() instanceof Bricks){
+            else if(object.getUserData() instanceof Bricks){
                 ((InteractiveObjects) object.getUserData()).HeadColission();
                 MainClass.manager.get("Audio/sounds/breakblock.wav",Sound.class).play();
             }
@@ -41,6 +46,15 @@ public class WorldContactListener implements ContactListener {
                 MainClass.manager.get("Audio/sounds/bump.wav",Sound.class).play();
             }
 
+
+
+        }
+        switch(cDef){/*
+            case MainClass.MARO_BIT | MainClass.ENEMY_HEAD_BIT:
+                if(fixA.getFilterData().categoryBits == MainClass.ENEMY_HEAD_BIT)
+                    ((Goomba)fixA.getUserData()).hitOnHead();
+                else if(fixB.getFilterData().categoryBits == MainClass.ENEMY_HEAD_BIT)
+                    ((Goomba)fixB.getUserData()).hitOnHead();*/
         }
 
     }

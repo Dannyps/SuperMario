@@ -3,7 +3,9 @@ package com.mygame.mario.Characters;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -19,6 +21,7 @@ public abstract class InteractiveObjects {
     protected TiledMap map;
     protected TiledMapTile tile;
     protected Rectangle bounds;
+    protected CircleShape circle;
     protected Body body;
     protected Fixture fixture;
 
@@ -42,6 +45,27 @@ public abstract class InteractiveObjects {
         body = world.createBody(bodyDef);
 
         polygonShape.setAsBox(bounds.getWidth() / 2 / MainClass.PPM, bounds.getHeight() / 2 / MainClass.PPM);
+        fixtureDef.shape = polygonShape;
+        fixture = body.createFixture(fixtureDef);
+
+        filter = new Filter();
+
+    }
+    public InteractiveObjects(BaseScreen screen, CircleShape circle) {
+        this.world = screen.getWorld();
+        this.map = screen.getMap();
+        this.circle = circle;
+
+        bodyDef = new BodyDef();
+        fixtureDef = new FixtureDef();
+        polygonShape = new PolygonShape();
+
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set((circle.getPosition().x + circle.getRadius()) / MainClass.PPM, (circle.getPosition().y + circle.getRadius()) / MainClass.PPM);
+
+        body = world.createBody(bodyDef);
+
+        polygonShape.setAsBox(circle.getRadius() / MainClass.PPM, circle.getRadius()/ MainClass.PPM);
         fixtureDef.shape = polygonShape;
         fixture = body.createFixture(fixtureDef);
 
