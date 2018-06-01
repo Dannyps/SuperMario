@@ -73,14 +73,14 @@ public class LoadMap {
         }
 
         // recognize bricks
-        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class))
+        for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bricks = new Bricks(screen, rectangle);
         }
 
         // recognize pipes
-        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class))
+        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
@@ -96,7 +96,7 @@ public class LoadMap {
 
 
         // recognize pipe level
-        for (MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class))
+        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
@@ -110,7 +110,7 @@ public class LoadMap {
         }
 
         // recognize question mark block
-        for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class))
+        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             qmark = new Qmark(screen, rectangle);
