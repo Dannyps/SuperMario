@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.Mario;
+import com.mygame.mario.Characters.Plant;
 import com.mygame.mario.Logic.LoadMap;
 import com.mygame.mario.Logic.WorldContactListener;
 import com.mygame.mario.MainClass;
@@ -47,10 +48,13 @@ public class BaseScreen implements Screen {
     //Actors
     private Mario player;
     private Goomba goomba;
+    private Plant plant;
 
     //buttons
     private TextButton buttonUp;
     private TextButton buttonFire;
+
+
 
     public BaseScreen(MainClass game)
     {
@@ -78,7 +82,7 @@ public class BaseScreen implements Screen {
         world = new World (new Vector2(0, -10f), true);
         player = new Mario(this);
         goomba = new Goomba(this,100,100);
-
+        plant = new Plant(this,50,50);
         world.setContactListener(new WorldContactListener());
 
         // to recognize pixels map
@@ -155,6 +159,7 @@ public class BaseScreen implements Screen {
         game.batch.begin();
         player.draw(game.batch);
         goomba.draw(game.batch);
+        plant.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -250,7 +255,7 @@ public class BaseScreen implements Screen {
         world.step(1/60f, 6, 2);
         goomba.update(fl);
         player.update(fl);
-
+        plant.update(fl);
         hud.update(fl);
 
         gameCam.position.x = player.body.getPosition().x;

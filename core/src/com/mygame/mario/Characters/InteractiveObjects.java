@@ -51,27 +51,6 @@ public abstract class InteractiveObjects {
         filter = new Filter();
 
     }
-    public InteractiveObjects(BaseScreen screen, CircleShape circle) {
-        this.world = screen.getWorld();
-        this.map = screen.getMap();
-        this.circle = circle;
-
-        bodyDef = new BodyDef();
-        fixtureDef = new FixtureDef();
-        polygonShape = new PolygonShape();
-
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set((circle.getPosition().x + circle.getRadius()) / MainClass.PPM, (circle.getPosition().y + circle.getRadius()) / MainClass.PPM);
-
-        body = world.createBody(bodyDef);
-
-        polygonShape.setAsBox(circle.getRadius() / MainClass.PPM, circle.getRadius()/ MainClass.PPM);
-        fixtureDef.shape = polygonShape;
-        fixture = body.createFixture(fixtureDef);
-
-        filter = new Filter();
-
-    }
 
     public abstract void HeadColission ();
 
