@@ -137,6 +137,7 @@ public class Mario extends Sprite {
 
     public void update(float fl)
     {
+        stateTime += fl;
         setPosition(body.getPosition().x -getWidth() / 2, body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(fl));
     }
@@ -152,7 +153,7 @@ public class Mario extends Sprite {
     private void defineMario()
     {
         BodyDef bodyd = new BodyDef();
-        bodyd.position.set(10/ MainClass.PPM, 10/ MainClass.PPM);
+        bodyd.position.set(200/ MainClass.PPM, 200/ MainClass.PPM);
         //bodyd.position.set(33 / MainClass.PPM, 33 / MainClass.PPM);
         bodyd.type = BodyDef.BodyType.DynamicBody;
 
@@ -172,7 +173,9 @@ public class Mario extends Sprite {
         head.set(new Vector2(-2 / MainClass.PPM, 6 / MainClass.PPM), new Vector2(2 / MainClass.PPM, 6 / MainClass.PPM));
         fixtured.shape = head;
         fixtured.isSensor = true;
-
+        fixtured.filter.categoryBits = MainClass.MARO_BIT;
         body.createFixture(fixtured).setUserData("head");
     }
+
+
 }

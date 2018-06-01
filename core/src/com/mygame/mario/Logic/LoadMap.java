@@ -9,11 +9,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
-import com.mygame.mario.Characters.Bricks;
-import com.mygame.mario.Characters.Coin;
-import com.mygame.mario.Characters.Goomba;
-import com.mygame.mario.Characters.Qmark;
+import com.mygame.mario.Objects.Bricks;
+import com.mygame.mario.Objects.Coin;
+import com.mygame.mario.Objects.Qmark;
 import com.mygame.mario.Levels.BaseScreen;
 import com.mygame.mario.MainClass;
 
@@ -25,8 +23,7 @@ public class LoadMap {
     private Body body;
     private Qmark qmark;
     private Bricks bricks;
-    private Coin coin;
-
+    private Coin coins;
     private World world;
     private TiledMap map;
 

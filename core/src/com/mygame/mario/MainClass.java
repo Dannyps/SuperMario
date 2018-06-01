@@ -22,7 +22,8 @@ public class MainClass extends Game {
 	public static final short OBJECT_BIT = 32;
 	public static final short ENEMY_BIT = 64;
 	public static final short ENEMY_HEAD_BIT = 128;
-	public SpriteBatch batch;
+    public static final short ITEM_BIT = 256;
+    public SpriteBatch batch;
 	public static AssetManager manager;
 
 
@@ -47,12 +48,15 @@ public class MainClass extends Game {
 	}
 
 	@Override
-	public void render () {
-		super.render();
-	}
-	
-	@Override
-	public void dispose () {
+	public void dispose() {
 		super.dispose();
+		manager.dispose();
+		batch.dispose();
+	}
+
+	@Override
+	public void render () {
+
+		super.render();
 	}
 }

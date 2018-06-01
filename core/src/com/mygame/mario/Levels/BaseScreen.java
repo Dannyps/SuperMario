@@ -23,6 +23,7 @@ import com.mygame.mario.Characters.Plant;
 import com.mygame.mario.Logic.LoadMap;
 import com.mygame.mario.Logic.WorldContactListener;
 import com.mygame.mario.MainClass;
+import com.mygame.mario.Objects.Coin;
 import com.mygame.mario.Scenes.Hud;
 
 public class BaseScreen implements Screen {
@@ -49,7 +50,7 @@ public class BaseScreen implements Screen {
     private Mario player;
     private Goomba goomba;
     private Plant plant;
-
+    private Coin coin;
     //buttons
     private TextButton buttonUp;
     private TextButton buttonFire;
@@ -68,7 +69,7 @@ public class BaseScreen implements Screen {
         gamePort = new StretchViewport(3, 2, gameCam);
 
         hud = new Hud(game.batch);
-
+        world = new World (new Vector2(0, -10f), true);
         maploader = new TmxMapLoader();
         map = level("level1m.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/MainClass.PPM);
@@ -79,14 +80,18 @@ public class BaseScreen implements Screen {
         buttonFire = new TextButton("Shots", new Skin(Gdx.files.internal("Skins/flat-earth/skin/flat-earth-ui.json")));
         loadButtons();
 
-        world = new World (new Vector2(0, -10f), true);
-        player = new Mario(this);
-        goomba = new Goomba(this,100,100);
-        plant = new Plant(this,50,50);
-        world.setContactListener(new WorldContactListener());
+
 
         // to recognize pixels map
         b2dr = new Box2DDebugRenderer();
+        world.setContactListener(new WorldContactListener());
+        player = new Mario(this);
+        goomba = new Goomba(this,100,100);
+        plant = new Plant(this,50,50);
+        coin = new Coin(this,200,150);
+
+
+
 
         loadMap = new LoadMap(this);
 
@@ -142,6 +147,7 @@ public class BaseScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         update(delta);
 
         // screen color
@@ -160,11 +166,11 @@ public class BaseScreen implements Screen {
         player.draw(game.batch);
         goomba.draw(game.batch);
         plant.draw(game.batch);
+        coin.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-
 
     }
 
@@ -250,17 +256,21 @@ public class BaseScreen implements Screen {
 
     public void update (float fl)
     {
-        handleInput(fl);
 
-        world.step(1/60f, 6, 2);
+        handleInput(fl);
+        world.step(1/60f, 6, 1);
+
+        gameCam.position.x = player.body.getPosition().x;
+
+
+
+        //SPRITES
         goomba.update(fl);
         player.update(fl);
         plant.update(fl);
+        coin.update(fl);
         hud.update(fl);
-
-        gameCam.position.x = player.body.getPosition().x;
         gameCam.update();
-
         renderer.setView(gameCam);
     }
 }

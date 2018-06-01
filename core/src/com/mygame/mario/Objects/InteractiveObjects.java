@@ -1,4 +1,4 @@
-package com.mygame.mario.Characters;
+package com.mygame.mario.Objects;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;

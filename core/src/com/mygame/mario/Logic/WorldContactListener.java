@@ -7,11 +7,11 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.mygame.mario.Characters.Bricks;
-import com.mygame.mario.Characters.Coin;
-import com.mygame.mario.Characters.Goomba;
-import com.mygame.mario.Characters.InteractiveObjects;
+import com.mygame.mario.Objects.Bricks;
+import com.mygame.mario.Objects.Coin;
+import com.mygame.mario.Objects.InteractiveObjects;
 import com.mygame.mario.MainClass;
+import com.mygame.mario.Objects.Item;
 
 public class WorldContactListener implements ContactListener {
 
@@ -21,8 +21,7 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         //an object
         Fixture fixB = contact.getFixtureB();
-
-        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits; // mario colides with head goomba
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits; // two collisions
 
 
         if(fixA.getUserData() == "head" || fixB.getUserData() == "head")
@@ -49,12 +48,13 @@ public class WorldContactListener implements ContactListener {
 
 
         }
-        switch(cDef){/*
-            case MainClass.MARO_BIT | MainClass.ENEMY_HEAD_BIT:
-                if(fixA.getFilterData().categoryBits == MainClass.ENEMY_HEAD_BIT)
-                    ((Goomba)fixA.getUserData()).hitOnHead();
-                else if(fixB.getFilterData().categoryBits == MainClass.ENEMY_HEAD_BIT)
-                    ((Goomba)fixB.getUserData()).hitOnHead();*/
+
+        switch(cDef){
+            case MainClass.MARO_BIT | MainClass.COIN_BIT:
+                if(fixA.getFilterData().categoryBits == MainClass.COIN_BIT)
+                    ((Item)fixA.getUserData()).use();
+                else if(fixB.getFilterData().categoryBits == MainClass.COIN_BIT)
+                    ((Item)fixA.getUserData()).use();
         }
 
     }
