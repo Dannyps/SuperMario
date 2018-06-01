@@ -9,8 +9,10 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygame.mario.Characters.Bricks;
 import com.mygame.mario.Characters.Coin;
+import com.mygame.mario.Characters.Enemy;
 import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.InteractiveObjects;
+import com.mygame.mario.Characters.Mario;
 import com.mygame.mario.MainClass;
 
 public class WorldContactListener implements ContactListener {
@@ -49,12 +51,11 @@ public class WorldContactListener implements ContactListener {
 
 
         }
-        switch(cDef){/*
-            case MainClass.MARO_BIT | MainClass.ENEMY_HEAD_BIT:
-                if(fixA.getFilterData().categoryBits == MainClass.ENEMY_HEAD_BIT)
-                    ((Goomba)fixA.getUserData()).hitOnHead();
-                else if(fixB.getFilterData().categoryBits == MainClass.ENEMY_HEAD_BIT)
-                    ((Goomba)fixB.getUserData()).hitOnHead();*/
+        else if((MainClass.MARO_BIT | MainClass.ENEMY_HEAD_BIT) == cDef){
+        //    if(fixA.getFilterData().categoryBits == MainClass.ENEMY_HEAD_BIT)
+//                ((Goomba) fixA.getUserData()).hitOnHead((Mario) fixB.getUserData());
+          //  else if(fixB.getFilterData().categoryBits == MainClass.ENEMY_HEAD_BIT)
+            //    ((Goomba)fixB.getUserData()).hitOnHead((Mario)fixA.getUserData());
         }
 
     }

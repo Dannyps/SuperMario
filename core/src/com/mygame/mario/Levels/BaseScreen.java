@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygame.mario.Characters.Enemy;
 import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.Mario;
 import com.mygame.mario.Logic.LoadMap;
@@ -66,7 +67,6 @@ public class BaseScreen implements Screen {
         hud = new Hud(game.batch);
 
         maploader = new TmxMapLoader();
-        map = level("level1m.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/MainClass.PPM);
         //gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
         gameCam.position.set(0, 1, 0);
@@ -76,13 +76,15 @@ public class BaseScreen implements Screen {
         loadButtons();
 
         world = new World (new Vector2(0, -10f), true);
+        // to recognize pixels map
+        b2dr = new Box2DDebugRenderer();
+
         player = new Mario(this);
         goomba = new Goomba(this,100,100);
 
         world.setContactListener(new WorldContactListener());
 
-        // to recognize pixels map
-        b2dr = new Box2DDebugRenderer();
+
 
         loadMap = new LoadMap(this);
 
@@ -139,7 +141,6 @@ public class BaseScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-
         // screen color
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

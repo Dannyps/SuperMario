@@ -1,6 +1,8 @@
 package com.mygame.mario.Characters;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -31,6 +33,8 @@ public class Goomba extends Enemy {
         setBounds(0, 0, 16 / MainClass.PPM, 16 / MainClass.PPM);
         setRegion(goombaRegion);
         loadTextures();
+        killGoomba = false;
+        killedGoomba = false;
     }
 
     @Override
@@ -57,9 +61,16 @@ public class Goomba extends Enemy {
     }
 
     @Override
-    public void hitOnHead() {
+    public void hitOnHead(Mario Mario) {
         killGoomba = true;
+        MainClass.manager.get("Audio/sounds/stomp.wav", Sound.class).play();
     }
+
+
+    public void draw(Batch batch){
+        if(!killedGoomba || runTime < 1)
+            super.draw(batch);
+        }
 
     @Override
     protected void defineEnemy() {
@@ -68,27 +79,27 @@ public class Goomba extends Enemy {
         bodyd.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bodyd);
 
-        FixtureDef fixtured = new FixtureDef();
+        FixtureDef fix = new FixtureDef();
         CircleShape cshape = new CircleShape();
         cshape.setRadius(6 / MainClass.PPM);
-        fixtured.filter.categoryBits = MainClass.ENEMY_BIT;
-        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.OBJECT_BIT | MainClass.MARO_BIT;
+        fix.filter.categoryBits = MainClass.ENEMY_BIT;
+        fix.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT |MainClass.ENEMY_BIT| MainClass.BRICK_BIT | MainClass.OBJECT_BIT | MainClass.MARO_BIT;
 
-        fixtured.shape = cshape;
-        body.createFixture(fixtured);
+        fix.shape = cshape;
+        body.createFixture(fix);
 
-        PolygonShape head = new PolygonShape();
+        PolygonShape head_enemy = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
         vertice[0] = new Vector2(-4.5f / MainClass.PPM, 9 / MainClass.PPM);
         vertice[1] = new Vector2(4.5f / MainClass.PPM, 9 / MainClass.PPM);
         vertice[2] = new Vector2(-2.5f / MainClass.PPM, 5 / MainClass.PPM);
         vertice[3] = new Vector2(2.5f / MainClass.PPM, 5 / MainClass.PPM);
-        head.set(vertice);
-        fixtured.shape = head;
-        fixtured.restitution = 0.5f;
-        fixtured.filter.categoryBits = MainClass.ENEMY_HEAD_BIT;
+        head_enemy.set(vertice);
+        fix.shape = head_enemy;
+        fix.restitution = 0.5f;
+        fix.filter.categoryBits = MainClass.ENEMY_HEAD_BIT;
 
-        body.createFixture(fixtured);
+        body.createFixture(fix);
     }
 
     @Override
@@ -96,9 +107,10 @@ public class Goomba extends Enemy {
         runTime += fl;
 
         if (killGoomba && !killedGoomba) {
-            setRegion(new TextureRegion(screen.getTexAtlas().findRegion("goomba"), 32, 0, 16, 16));
             world.destroyBody(body);
+            setRegion(new TextureRegion(screen.getTexAtlas().findRegion("goomba"), 32, 0, 16, 16));
             killedGoomba = true;
+            runTime = 0;
         } else if (!killedGoomba) {
             setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
             setRegion(getFrame());

@@ -9,8 +9,10 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.mygame.mario.Characters.Bricks;
 import com.mygame.mario.Characters.Coin;
+import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.Qmark;
 import com.mygame.mario.Levels.BaseScreen;
 import com.mygame.mario.MainClass;
@@ -71,14 +73,14 @@ public class LoadMap {
         }
 
         // recognize bricks
-        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class))
+        for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bricks = new Bricks(screen, rectangle);
         }
 
         // recognize pipes
-        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class))
+        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
@@ -92,22 +94,9 @@ public class LoadMap {
             body.createFixture(fixtured);
         }
 
-        // recognize stairs
-        for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bodyd.type = BodyDef.BodyType.StaticBody;
-            bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
-
-            body = world.createBody(bodyd);
-
-            shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
-            fixtured.shape = shape;
-            body.createFixture(fixtured);
-        }
 
         // recognize pipe level
-        for (MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class))
+        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bodyd.type = BodyDef.BodyType.StaticBody;
@@ -121,7 +110,7 @@ public class LoadMap {
         }
 
         // recognize question mark block
-        for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class))
+        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             qmark = new Qmark(screen, rectangle);

@@ -163,7 +163,7 @@ public class Mario extends Sprite {
         cshape.setRadius(6 / MainClass.PPM);
 
         fixtured.filter.categoryBits = MainClass.MARO_BIT;
-        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.ENEMY_BIT | MainClass.OBJECT_BIT |MainClass.ENEMY_BIT| MainClass.ENEMY_HEAD_BIT;
+        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.ENEMY_BIT | MainClass.OBJECT_BIT| MainClass.ENEMY_HEAD_BIT;
 
         fixtured.shape = cshape;
         body.createFixture(fixtured);
