@@ -41,7 +41,9 @@ public abstract class InteractiveObjects {
 
         bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set((bounds.getX() + bounds.getWidth() / 2) / MainClass.PPM, (bounds.getY() + bounds.getHeight() / 2) / MainClass.PPM);
+
         body = world.createBody(bodyDef);
+
         polygonShape.setAsBox(bounds.getWidth() / 2 / MainClass.PPM, bounds.getHeight() / 2 / MainClass.PPM);
         fixtureDef.shape = polygonShape;
         fixture = body.createFixture(fixtureDef);
