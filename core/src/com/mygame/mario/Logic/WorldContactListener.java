@@ -12,6 +12,7 @@ import com.mygame.mario.Objects.Coin;
 import com.mygame.mario.Objects.InteractiveObjects;
 import com.mygame.mario.MainClass;
 import com.mygame.mario.Objects.Item;
+import com.mygame.mario.Objects.PipeLevel;
 
 public class WorldContactListener implements ContactListener {
 
@@ -56,6 +57,17 @@ public class WorldContactListener implements ContactListener {
                 else if(fixB.getFilterData().categoryBits == MainClass.COIN_BIT)
                     ((Item)fixA.getUserData()).use();
         }*/
+
+        if(fixA.getUserData() == "bound" || fixB.getUserData() == "bound")
+        {
+            Fixture head = fixA.getUserData() == "bound" ? fixA : fixB;
+            Fixture object = head == fixA ? fixB : fixA;
+
+            if(object.getUserData() instanceof PipeLevel)
+            {
+                ((PipeLevel) object.getUserData()).BoundColission();
+            }
+        }
 
     }
 

@@ -163,17 +163,26 @@ public class Mario extends Sprite {
         cshape.setRadius(6 / MainClass.PPM);
 
         fixtured.filter.categoryBits = MainClass.MARO_BIT;
-        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.ENEMY_BIT | MainClass.OBJECT_BIT |MainClass.ENEMY_BIT| MainClass.ENEMY_HEAD_BIT;
+        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.ENEMY_BIT | MainClass.OBJECT_BIT |MainClass.ENEMY_BIT| MainClass.ENEMY_HEAD_BIT | MainClass.PIPE_LEVEL;
 
         fixtured.shape = cshape;
         body.createFixture(fixtured);
 
+        // CREATE MARIO HEAD
         EdgeShape head = new EdgeShape();
         head.set(new Vector2(-2 / MainClass.PPM, 6 / MainClass.PPM), new Vector2(2 / MainClass.PPM, 6 / MainClass.PPM));
         fixtured.shape = head;
         fixtured.isSensor = true;
         fixtured.filter.categoryBits = MainClass.MARO_BIT;
         body.createFixture(fixtured).setUserData("head");
+
+        // CREATE SENSOR MARIO FEET
+        EdgeShape bound = new EdgeShape();
+        bound.set(new Vector2(-2 / MainClass.PPM, -7 / MainClass.PPM), new Vector2(2 / MainClass.PPM, -7 / MainClass.PPM));
+        fixtured.shape = bound;
+        fixtured.isSensor = true;
+        fixtured.filter.categoryBits = MainClass.MARO_BIT;
+        body.createFixture(fixtured).setUserData("bound");
     }
 
 
