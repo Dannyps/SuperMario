@@ -3,7 +3,6 @@ package com.mygame.mario.Objects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
@@ -13,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygame.mario.Levels.BaseScreen;
+import com.mygame.mario.Logic.BaseScreen;
 import com.mygame.mario.MainClass;
 
 public abstract class InteractiveObjects {

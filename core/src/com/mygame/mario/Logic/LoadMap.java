@@ -11,8 +11,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygame.mario.Objects.Bricks;
 import com.mygame.mario.Objects.Coin;
+import com.mygame.mario.Objects.PipeLevel;
 import com.mygame.mario.Objects.Qmark;
-import com.mygame.mario.Levels.BaseScreen;
 import com.mygame.mario.MainClass;
 
 public class LoadMap {
@@ -24,6 +24,7 @@ public class LoadMap {
     private Qmark qmark;
     private Bricks bricks;
     private Coin coins;
+    private PipeLevel pipeLevel;
     private World world;
     private TiledMap map;
 
@@ -96,14 +97,15 @@ public class LoadMap {
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bodyd.type = BodyDef.BodyType.StaticBody;
+            pipeLevel = new PipeLevel(screen, rectangle);
+            /*bodyd.type = BodyDef.BodyType.StaticBody;
             bodyd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / MainClass.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / MainClass.PPM);
 
             body = world.createBody(bodyd);
 
             shape.setAsBox(rectangle.getWidth() / 2 / MainClass.PPM, rectangle.getHeight() / 2 / MainClass.PPM);
             fixtured.shape = shape;
-            body.createFixture(fixtured);
+            body.createFixture(fixtured);*/
         }
 
         // recognize question mark block

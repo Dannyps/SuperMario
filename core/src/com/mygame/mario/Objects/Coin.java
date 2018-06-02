@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
-import com.mygame.mario.Levels.BaseScreen;
+import com.mygame.mario.Logic.BaseScreen;
 import com.mygame.mario.MainClass;
 
 public class Coin extends Item {

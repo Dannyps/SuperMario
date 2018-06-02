@@ -1,6 +1,5 @@
 package com.mygame.mario.Characters;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.mygame.mario.Levels.BaseScreen;
+import com.mygame.mario.Logic.BaseScreen;
 import com.mygame.mario.MainClass;
 
 public class Mario extends Sprite {

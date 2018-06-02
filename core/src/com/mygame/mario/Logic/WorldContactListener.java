@@ -49,13 +49,13 @@ public class WorldContactListener implements ContactListener {
 
         }
 
-        switch(cDef){
+        /*switch(cDef){
             case MainClass.MARO_BIT | MainClass.COIN_BIT:
                 if(fixA.getFilterData().categoryBits == MainClass.COIN_BIT)
                     ((Item)fixA.getUserData()).use();
                 else if(fixB.getFilterData().categoryBits == MainClass.COIN_BIT)
                     ((Item)fixA.getUserData()).use();
-        }
+        }*/
 
     }
 

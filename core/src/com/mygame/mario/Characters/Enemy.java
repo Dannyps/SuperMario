@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.mygame.mario.Levels.BaseScreen;
+import com.mygame.mario.Logic.BaseScreen;
 
 public abstract class Enemy extends Sprite {
 

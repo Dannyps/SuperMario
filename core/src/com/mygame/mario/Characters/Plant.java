@@ -3,18 +3,13 @@ package com.mygame.mario.Characters;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
-import com.mygame.mario.Levels.BaseScreen;
+import com.mygame.mario.Logic.BaseScreen;
 import com.mygame.mario.MainClass;
-
-import java.awt.geom.RectangularShape;
 
 public class Plant extends Enemy {
 

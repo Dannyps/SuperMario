@@ -2,7 +2,7 @@ package com.mygame.mario.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
-import com.mygame.mario.Levels.BaseScreen;
+import com.mygame.mario.Logic.BaseScreen;
 import com.mygame.mario.MainClass;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygame.mario.Scenes.Hud;

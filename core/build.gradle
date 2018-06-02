@@ -9,3 +9,17 @@ sourceSets.main.java.srcDirs = [ "src/" ]
 eclipse.project {
     name = appName + "-core"
 }
+
+sourceSets.test.java.srcDirs = ["/test"]
+
+dependencies {
+
+    testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    testCompile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:2.2.7"
+}

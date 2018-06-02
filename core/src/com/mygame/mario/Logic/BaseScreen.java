@@ -1,4 +1,4 @@
-package com.mygame.mario.Levels;
+package com.mygame.mario.Logic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -51,6 +51,7 @@ public class BaseScreen implements Screen {
     private Goomba goomba;
     private Plant plant;
     private Coin coin;
+
     //buttons
     private TextButton buttonUp;
     private TextButton buttonFire;
@@ -63,9 +64,6 @@ public class BaseScreen implements Screen {
         this.texAtlas = new TextureAtlas("Mario_friends.pack");
 
         gameCam = new OrthographicCamera();
-        //gamePort = new StretchViewport(800, 400, gameCam);
-        //gamePort = new ScreenViewport(gameCam);
-        //gamePort = new FitViewport(MainClass.V_WIDTH/MainClass.PPM, MainClass.V_HEIGTH/ MainClass.PPM, gameCam);
         gamePort = new StretchViewport(3, 2, gameCam);
 
         hud = new Hud(game.batch);
