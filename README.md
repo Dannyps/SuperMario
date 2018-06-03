@@ -8,7 +8,7 @@ Made in colaboration with [Christopher Fernandes de Abreu](https://github.com/cf
 
 ## Second Project
 
-Our project goal is to create a Super Mario like game still side-scroller like the original, but with a couple twists. It will have a special boss with a different game mechanic with AI and it's also an Android game. We develop this game with the help of an DP API called Tiled https://www.mapeditor.org/ .
+Our project goal is to create a Super Mario like game still side-scroller like the original, but with a couple twists. It will have physics methods implemented on Mario and it's also an Android game. We develop this game with the help of an DP API called Tiled https://www.mapeditor.org/ .
 
 ## How to play
 User has to click on play game button and game will begin.<br>
