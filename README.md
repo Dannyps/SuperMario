@@ -17,11 +17,11 @@ To control Mario:<br>
 - Click on the left side screen and he move to the left;
 - Click on the button jump to jump.
 
-**Screenshots**
+ ## Screenshots
 
 <img src="https://github.com/mcarolinaSoares/SuperMario/blob/master/AndroidApp/1.png" width="800"><br><br>
 
-**UML**
+## UML
 
 
 <img src="https://github.com/mcarolinaSoares/SuperMario/blob/master/UML/SuperMario.jpg" width="800"><br><br>
