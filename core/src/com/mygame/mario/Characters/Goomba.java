@@ -14,6 +14,7 @@ import com.mygame.mario.MainClass;
 
 public class Goomba extends Enemy {
 
+    private int timer;
     private boolean goombaRight;
     private boolean killGoomba;
     private boolean killedGoomba;
@@ -32,6 +33,7 @@ public class Goomba extends Enemy {
         setRegion(goombaRegion);
         loadTextures();
         fixture.setUserData(this);
+        timer = 0;
     }
 
     @Override
@@ -92,10 +94,30 @@ public class Goomba extends Enemy {
         fixture = body.createFixture(fixtured);
     }
 
+    public void reverse() {
+        goombaRight = !goombaRight;
+    }
+
+    public void movement(){
+        if(body.getLinearVelocity().x > -1 && !goombaRight){
+            body.applyLinearImpulse(new Vector2(-0.05f, 0), body.getWorldCenter(), true);
+            timer += 1;
+        }
+        else if(body.getLinearVelocity().x < 1 && goombaRight){
+            body.applyLinearImpulse(new Vector2(0.05f, 0), body.getWorldCenter(), true);
+            timer += 1;
+        }
+        if(timer == 100) {
+            goombaRight = !goombaRight;
+            timer = 0;
+        }
+    }
+
+
     @Override
     public void update(float fl) {
         runTime += fl;
-
+        movement();
         if (killGoomba && !killedGoomba) {
             setRegion(new TextureRegion(screen.getTexAtlas().findRegion("goomba"), 32, 0, 16, 16));
             world.destroyBody(body);

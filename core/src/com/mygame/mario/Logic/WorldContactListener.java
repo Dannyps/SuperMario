@@ -58,19 +58,30 @@ public class WorldContactListener implements ContactListener {
         switch(cDef){
                 case MainClass.MARO_BIT | MainClass.ENEMY_BIT:
                     if(fixA.getFilterData().categoryBits == MainClass.ENEMY_BIT){
-                        //((Goomba)fixA.getUserData()).use();
-                        MainClass.manager.get("Audio/sounds/coin.wav",Sound.class).play();}
+                        if((fixB.getUserData() != "head" && fixB.getUserData() != "bound" )){
+                        ((Mario)fixB.getUserData()).hit();
+                        }
+
+                    }
                     else if(fixB.getFilterData().categoryBits == MainClass.ENEMY_BIT){
-                        //((Goomba)fixA.getUserData()).use();
-                        MainClass.manager.get("Audio/sounds/coin.wav",Sound.class).play();}
+                        if((fixA.getUserData() != "head" && fixA.getUserData() != "bound" )){
+                            ((Mario)fixA.getUserData()).hit();
+                        }
+                    }
+                        break;
                 case MainClass.MARO_BIT | MainClass.COIN_BIT:
                     if(fixA.getFilterData().categoryBits == MainClass.COIN_BIT){
                         ((Coin)fixA.getUserData()).use();
                         MainClass.manager.get("Audio/sounds/coin.wav",Sound.class).play();}
                     else if(fixB.getFilterData().categoryBits == MainClass.COIN_BIT){
                         ((Coin)fixB.getUserData()).use();
-                        MainClass.manager.get("Audio/sounds/coin.wav",Sound.class).play();}
+                        MainClass.manager.get("Audio/sounds/coin.wav",Sound.class).play();
+                    }
+                    break;
+
         }
+
+
         /* ATTEMPT 2
 
 

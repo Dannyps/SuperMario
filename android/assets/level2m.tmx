@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="180" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="301">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="180" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="313">
  <tileset firstgid="1" source="tile-supermario.tsx"/>
  <layer name="background" width="180" height="13">
   <data encoding="base64" compression="zlib">
@@ -78,7 +78,17 @@
   <object id="235" x="288" y="64" width="16" height="16"/>
   <object id="236" x="288" y="128" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="goombas"/>
+ <objectgroup name="goombas">
+  <object id="302" x="208" y="176" width="16" height="16"/>
+  <object id="303" x="256" y="176" width="16" height="16"/>
+  <object id="304" x="432" y="176" width="16" height="16"/>
+  <object id="305" x="768" y="176" width="16" height="16"/>
+  <object id="307" x="1136" y="176" width="16" height="16"/>
+  <object id="309" x="1680" y="176" width="16" height="16"/>
+  <object id="310" x="1840" y="176" width="16" height="16"/>
+  <object id="311" x="1968" y="176" width="16" height="16"/>
+  <object id="312" x="2096" y="176" width="16" height="16"/>
+ </objectgroup>
  <objectgroup name="plants"/>
  <objectgroup name="coins">
   <object id="277" x="848" y="144" width="16" height="16"/>

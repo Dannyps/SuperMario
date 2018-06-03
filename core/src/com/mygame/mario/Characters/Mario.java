@@ -1,5 +1,6 @@
 package com.mygame.mario.Characters;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -17,8 +19,10 @@ import com.mygame.mario.MainClass;
 public class Mario extends Sprite {
 
     private final BaseScreen screen;
+    private int lives;
     public World world;
     public Body body;
+    private Fixture fixture;
 
     public enum State {Fall, Jump, Stand, Run};
     public State currentState;
@@ -45,7 +49,7 @@ public class Mario extends Sprite {
     lastState = State.Stand;
     stateTime = 0;
     runRight = true;
-
+    lives = 1;
     frames = new Array<TextureRegion> ();
     loadTextures();
 
@@ -57,10 +61,24 @@ public class Mario extends Sprite {
     setRegion(marioRegion);
 
     marioIsBig = true;
+    fixture.setUserData(this);
 }
 
     public TextureRegion getTextureRegion() {
         return screen.getTexAtlas().findRegion("little_mario_special");
+    }
+
+    public Integer getLives(){
+        return lives;
+    }
+
+    public void hit(){
+        lives--;
+        if(getLives() <= 0){
+            MainClass.manager.get("Audio/sounds/mariodie.wav",Sound.class).play();
+        }
+        else
+            MainClass.manager.get("Audio/sounds/powerdown.wav",Sound.class).play();
     }
 
     //load das texturas para as diferentes animações
@@ -153,7 +171,7 @@ public class Mario extends Sprite {
     private void defineMario()
     {
         BodyDef bodyd = new BodyDef();
-        bodyd.position.set(200/ MainClass.PPM, 200/ MainClass.PPM);
+        bodyd.position.set(10/ MainClass.PPM, 10/ MainClass.PPM);
         //bodyd.position.set(33 / MainClass.PPM, 33 / MainClass.PPM);
         bodyd.type = BodyDef.BodyType.DynamicBody;
 
@@ -167,7 +185,7 @@ public class Mario extends Sprite {
         fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.ENEMY_BIT | MainClass.OBJECT_BIT |MainClass.ENEMY_BIT| MainClass.ENEMY_HEAD_BIT | MainClass.PIPE_LEVEL;
 
         fixtured.shape = cshape;
-        body.createFixture(fixtured);
+        fixture = body.createFixture(fixtured);
 
         // CREATE MARIO HEAD
         EdgeShape head = new EdgeShape();

@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import java.awt.Color;
 import java.awt.Label;*/
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -43,7 +44,7 @@ public class Hud implements Disposable{
     private Label lmario;
 
     public Hud(SpriteBatch sbatch) {
-        time = 300;
+        time = 100;
         countTime = 0;
         score = 0;
 
@@ -87,16 +88,16 @@ public class Hud implements Disposable{
             lcount.setText(String.format("%03d", time));
             countTime = 0;
         }
-        else if(time <= 0){
-
-            //KILL MARIO
-        }
     }
 
     public static void updateScore(int value)
     {
         score += value;
         lscore.setText(String.format("%06d", score));
+    }
+    public Integer getTime()
+    {
+        return time;
     }
 
 

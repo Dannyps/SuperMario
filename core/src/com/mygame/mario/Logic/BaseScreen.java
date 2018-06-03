@@ -1,7 +1,9 @@
 package com.mygame.mario.Logic;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -26,7 +28,10 @@ import com.mygame.mario.Logic.WorldContactListener;
 import com.mygame.mario.MainClass;
 import com.mygame.mario.Objects.Coin;
 import com.mygame.mario.Objects.Item;
+import com.mygame.mario.Scenes.Ending;
 import com.mygame.mario.Scenes.Hud;
+
+import static com.mygame.mario.MainClass.i;
 
 public class BaseScreen implements Screen {
 
@@ -57,10 +62,13 @@ public class BaseScreen implements Screen {
     //buttons
     private TextButton buttonUp;
     private TextButton buttonFire;
+    private boolean jump;
 
 
     public BaseScreen(MainClass game)
     {
+        jump = false;
+
         this.game = game;
         this.texAtlas = new TextureAtlas("Mario_friends.pack");
 
@@ -70,7 +78,7 @@ public class BaseScreen implements Screen {
         hud = new Hud(game.batch);
         world = new World (new Vector2(0, -10f), true);
         maploader = new TmxMapLoader();
-        map = level("level1m.tmx");
+        map = level(MainClass.levels[i]+".tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/MainClass.PPM);
         //gameCam.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
         gameCam.position.set(0, 1, 0);
@@ -218,8 +226,15 @@ public class BaseScreen implements Screen {
     public void handleInput(float fl)
     {
         // for desktop
-        /*if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+/*
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.body.getLinearVelocity().y <= 2 ) {
+            if(jump == false) {
+                player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+                jump = true;
+            }
+            else if(player.body.getLinearVelocity().y <= 1){
+                jump = false;
+            }
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.body.getLinearVelocity().x <= 2)
@@ -235,6 +250,7 @@ public class BaseScreen implements Screen {
         //&& (!(Gdx.input.isButtonPressed((int) ((int) buttonUp.getX() + buttonUp.getWidth())))
 
         //for android
+
         if(Gdx.input.isTouched()  && (!(buttonUp.isPressed())))
         {
             //rigth one
@@ -277,5 +293,17 @@ public class BaseScreen implements Screen {
         hud.update(fl);
         gameCam.update();
         renderer.setView(gameCam);
+        if(hud.getTime() <= 0 || player.getLives() <= 0){
+            i= 0;
+            MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).stop();
+            game.setScreen(new Ending(game));
+
+        }
+        else if(player.getX() >= 2860/MainClass.PPM  && (i == 1 || i == 0)){
+            i++;
+            MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).stop();
+            game.setScreen(new BaseScreen(game));
+        }
+
     }
 }

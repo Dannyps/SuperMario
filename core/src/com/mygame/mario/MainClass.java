@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.mygame.mario.Scenes.MainMenu;
 
 public class MainClass extends Game {
@@ -26,10 +27,13 @@ public class MainClass extends Game {
 	public static final short PIPE_LEVEL = 512;
     public SpriteBatch batch;
 	public static AssetManager manager;
+	public static int i;
 
+	public static String[] levels = new String[]{"level1m", "level2m", "level3m"};
 
 	@Override
 	public void create () {
+		i = 0;
 		batch = new SpriteBatch();
 		manager = new AssetManager();
 		manager.load("Audio/music/mario_music.ogg",Music.class);
@@ -42,7 +46,6 @@ public class MainClass extends Game {
 		manager.load("Audio/sounds/powerup_spawn.wav",Sound.class);
 		manager.load("Audio/sounds/stomp.wav",Sound.class);
 		manager.finishLoading();
-
 		setScreen(new MainMenu(this));
 
 
