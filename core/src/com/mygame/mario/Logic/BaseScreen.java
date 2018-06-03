@@ -23,8 +23,6 @@ import com.mygame.mario.Characters.Enemy;
 import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.Mario;
 import com.mygame.mario.Characters.Plant;
-import com.mygame.mario.Logic.LoadMap;
-import com.mygame.mario.Logic.WorldContactListener;
 import com.mygame.mario.MainClass;
 import com.mygame.mario.Objects.Coin;
 import com.mygame.mario.Objects.Item;
@@ -226,10 +224,10 @@ public class BaseScreen implements Screen {
     public void handleInput(float fl)
     {
         // for desktop
-/*
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.body.getLinearVelocity().y <= 2 ) {
             if(jump == false) {
-                player.body.applyLinearImpulse(new Vector2(0, 4f), player.body.getWorldCenter(), true);
+                player.body.applyLinearImpulse(new Vector2(0, 4.5f), player.body.getWorldCenter(), true);
                 jump = true;
             }
             else if(player.body.getLinearVelocity().y <= 1){
@@ -245,7 +243,7 @@ public class BaseScreen implements Screen {
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.body.getLinearVelocity().x >= -2)
         {
             player.body.applyLinearImpulse(new Vector2(-0.1f, 0), player.body.getWorldCenter(), true);
-        }*/
+        }
 
         //&& (!(Gdx.input.isButtonPressed((int) ((int) buttonUp.getX() + buttonUp.getWidth())))
 
@@ -293,10 +291,17 @@ public class BaseScreen implements Screen {
         hud.update(fl);
         gameCam.update();
         renderer.setView(gameCam);
-        if(hud.getTime() <= 0 || player.getLives() <= 0){
+        if(hud.getTime() <= 0 || (player.getSize() <= 0 && MainClass.lives <= 0)){
             i= 0;
             MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).stop();
+            MainClass.lives = 3;
             game.setScreen(new Ending(game));
+
+
+        }
+        else if(hud.getTime() <= 0 || player.getSize() <= 0 || player.getY() <= -16/MainClass.PPM || player.getY() >= 238/MainClass.PPM ){
+            MainClass.manager.get("Audio/music/mario_music.ogg",Music.class).stop();
+            game.setScreen(new BaseScreen(game));
 
         }
         else if(player.getX() >= 2860/MainClass.PPM  && (i == 1 || i == 0)){

@@ -19,10 +19,12 @@ import com.mygame.mario.MainClass;
 public class Mario extends Sprite {
 
     private final BaseScreen screen;
-    private int lives;
+    private int size;
     public World world;
     public Body body;
     private Fixture fixture;
+
+
 
     public enum State {Fall, Jump, Stand, Run};
     public State currentState;
@@ -49,10 +51,9 @@ public class Mario extends Sprite {
     lastState = State.Stand;
     stateTime = 0;
     runRight = true;
-    lives = 1;
+    size = 1;
     frames = new Array<TextureRegion> ();
     loadTextures();
-
     defineMario();
 
     marioRegion = new TextureRegion(getTextureRegion(), 0, 0, 16, 16);
@@ -68,14 +69,16 @@ public class Mario extends Sprite {
         return screen.getTexAtlas().findRegion("little_mario_special");
     }
 
-    public Integer getLives(){
-        return lives;
+    public Integer getSize(){
+        return size;
     }
 
+
     public void hit(){
-        lives--;
-        if(getLives() <= 0){
+        size--;
+        if(getSize() <= 0){
             MainClass.manager.get("Audio/sounds/mariodie.wav",Sound.class).play();
+            MainClass.lives--;
         }
         else
             MainClass.manager.get("Audio/sounds/powerdown.wav",Sound.class).play();
