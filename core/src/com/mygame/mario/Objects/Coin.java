@@ -4,13 +4,16 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.mygame.mario.Logic.BaseScreen;
 import com.mygame.mario.MainClass;
+import com.mygame.mario.Scenes.Hud;
 
 public class Coin extends Item {
+    private Fixture fixture;
     private TextureRegion coinRegion;
     private Array<TextureRegion> frames;
     private Animation coinAnimate;
@@ -24,6 +27,7 @@ public class Coin extends Item {
         setBounds(0, 0, 20 / MainClass.PPM, 20 / MainClass.PPM);
         setRegion(coinRegion);
         loadTextures();
+        fixture.setUserData(this);
 
     }
     public TextureRegion getTexRegion() {
@@ -49,27 +53,28 @@ public class Coin extends Item {
     @Override
     public void defineItem() {
         BodyDef bodyd = new BodyDef();
-        bodyd.position.set(getX()/ MainClass.PPM,getY()/ MainClass.PPM);
-        bodyd.type = BodyDef.BodyType.KinematicBody;
+        bodyd.position.set(10/MainClass.PPM + getX()/ MainClass.PPM,10/MainClass.PPM+ getY()/ MainClass.PPM);
+        bodyd.type = BodyDef.BodyType.StaticBody;
         body = world.createBody(bodyd);
         FixtureDef fixtured = new FixtureDef();
         fixtured.filter.categoryBits = MainClass.COIN_BIT;
         fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.OBJECT_BIT | MainClass.MARO_BIT;
         PolygonShape coin = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(0 / MainClass.PPM, 5 / MainClass.PPM);
-        vertice[1] = new Vector2(5 / MainClass.PPM, 5 / MainClass.PPM);
-        vertice[2] = new Vector2(0 / MainClass.PPM, 0 / MainClass.PPM);
-        vertice[3] = new Vector2(5/ MainClass.PPM, 0 / MainClass.PPM);
+        vertice[0] = new Vector2(6f / MainClass.PPM, 6f  / MainClass.PPM);
+        vertice[1] = new Vector2(-6f / MainClass.PPM, 6f  / MainClass.PPM);
+        vertice[2] = new Vector2(-6f / MainClass.PPM, -6f  / MainClass.PPM);
+        vertice[3] = new Vector2(6f/ MainClass.PPM, -6f  / MainClass.PPM);
         coin.set(vertice);
         fixtured.shape = coin;
-        body.createFixture(fixtured);
+        fixture = body.createFixture(fixtured);
 
     }
 
     @Override
     public void use() {
         destroy();
+        Hud.updateScore(30);
     }
 
     @Override

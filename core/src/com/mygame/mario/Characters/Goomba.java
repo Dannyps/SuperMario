@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
@@ -19,6 +20,7 @@ public class Goomba extends Enemy {
 
     private TextureRegion goombaRegion;
     private Animation goombaMove;
+    private Fixture fixture;
 
 
     public Goomba(BaseScreen screen, float x, float y) {
@@ -29,6 +31,7 @@ public class Goomba extends Enemy {
         setBounds(0, 0, 16 / MainClass.PPM, 16 / MainClass.PPM);
         setRegion(goombaRegion);
         loadTextures();
+        fixture.setUserData(this);
     }
 
     @Override
@@ -70,7 +73,7 @@ public class Goomba extends Enemy {
         CircleShape cshape = new CircleShape();
         cshape.setRadius(6 / MainClass.PPM);
         fixtured.filter.categoryBits = MainClass.ENEMY_BIT;
-        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.OBJECT_BIT | MainClass.MARO_BIT;
+        fixtured.filter.maskBits = MainClass.DEFAULT_BIT | MainClass.COIN_BIT | MainClass.BRICK_BIT | MainClass.ENEMY_BIT |MainClass.OBJECT_BIT | MainClass.MARO_BIT;
 
         fixtured.shape = cshape;
         body.createFixture(fixtured);
@@ -86,7 +89,7 @@ public class Goomba extends Enemy {
         fixtured.restitution = 0.5f;
         fixtured.filter.categoryBits = MainClass.ENEMY_HEAD_BIT;
 
-        body.createFixture(fixtured);
+        fixture = body.createFixture(fixtured);
     }
 
     @Override

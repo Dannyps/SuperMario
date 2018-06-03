@@ -143,12 +143,13 @@ public class Mario extends Sprite {
     public boolean marioBig(){
         return marioIsBig;
     }
-    /*
+
         public void grow(){
             if(!marioBig()){
                 marioIsBig = true;
+
             }
-        }*/
+        }
     private void defineMario()
     {
         BodyDef bodyd = new BodyDef();

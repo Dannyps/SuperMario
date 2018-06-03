@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="16" height="26" tilewidth="16" tileheight="16" infinite="0" nextobjectid="199">
+ <tileset firstgid="1" source="tile-supermario.tsx"/>
+ <layer name="background" width="16" height="26">
+  <data encoding="base64" compression="zlib">
+   eJw7zMjAcJhCvIcBgn8C2dcYGRquAmls+BqSWhDGph8ZI6vFhtH1YzOHHP3o5pCrn1z3j+of1T+qf1T/UNFPCQYAv0E3zg==
+  </data>
+ </layer>
+ <layer name="graphs" width="16" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzrYGBg6KAQkwtG9Y/qH9U/qn9U/9DWTwkGAIOWKoE=
+  </data>
+ </layer>
+ <objectgroup name="eblock"/>
+ <objectgroup name="ground">
+  <object id="192" x="0" y="400" width="256" height="16"/>
+  <object id="193" x="0" y="16" width="16" height="384.043"/>
+  <object id="196" x="240" y="16" width="16" height="383.892"/>
+  <object id="198" x="0" y="0" width="256" height="16"/>
+ </objectgroup>
+ <objectgroup name="bricks" opacity="0.99"/>
+ <objectgroup name="pipe"/>
+ <objectgroup name="pipelevel"/>
+ <objectgroup name="qmark"/>
+ <objectgroup name="goombas"/>
+ <objectgroup name="plants"/>
+ <objectgroup name="coins"/>
+ <objectgroup name="fall"/>
+</map>

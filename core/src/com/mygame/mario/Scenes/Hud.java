@@ -87,6 +87,10 @@ public class Hud implements Disposable{
             lcount.setText(String.format("%03d", time));
             countTime = 0;
         }
+        else if(time <= 0){
+
+            //KILL MARIO
+        }
     }
 
     public static void updateScore(int value)

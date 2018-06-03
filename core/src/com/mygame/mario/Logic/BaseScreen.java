@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygame.mario.Characters.Enemy;
 import com.mygame.mario.Characters.Goomba;
 import com.mygame.mario.Characters.Mario;
 import com.mygame.mario.Characters.Plant;
@@ -24,6 +25,7 @@ import com.mygame.mario.Logic.LoadMap;
 import com.mygame.mario.Logic.WorldContactListener;
 import com.mygame.mario.MainClass;
 import com.mygame.mario.Objects.Coin;
+import com.mygame.mario.Objects.Item;
 import com.mygame.mario.Scenes.Hud;
 
 public class BaseScreen implements Screen {
@@ -57,7 +59,6 @@ public class BaseScreen implements Screen {
     private TextButton buttonFire;
 
 
-
     public BaseScreen(MainClass game)
     {
         this.game = game;
@@ -82,11 +83,9 @@ public class BaseScreen implements Screen {
 
         // to recognize pixels map
         b2dr = new Box2DDebugRenderer();
+
         world.setContactListener(new WorldContactListener());
         player = new Mario(this);
-        goomba = new Goomba(this,100,100);
-        plant = new Plant(this,50,50);
-        coin = new Coin(this,200,150);
 
 
 
@@ -162,9 +161,11 @@ public class BaseScreen implements Screen {
 
         game.batch.begin();
         player.draw(game.batch);
-        goomba.draw(game.batch);
-        plant.draw(game.batch);
-        coin.draw(game.batch);
+        for (Enemy enemy : loadMap.getEnemies())
+            enemy.draw(game.batch);
+        for (Item item : loadMap.getItems())
+            item.draw(game.batch);
+
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -263,10 +264,16 @@ public class BaseScreen implements Screen {
 
 
         //SPRITES
-        goomba.update(fl);
+        for(Enemy enemy : loadMap.getEnemies()) {
+            enemy.update(fl);
+            if(enemy.getX() < player.getX() + 224 / MainClass.PPM) {
+                enemy.body.setActive(true);
+            }
+        }
+        for(Item item : loadMap.getItems()) {
+            item.update(fl);
+        }
         player.update(fl);
-        plant.update(fl);
-        coin.update(fl);
         hud.update(fl);
         gameCam.update();
         renderer.setView(gameCam);

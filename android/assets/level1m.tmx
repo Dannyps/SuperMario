@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="180" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="192">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="180" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="200">
  <tileset firstgid="1" source="tile-supermario.tsx"/>
  <layer name="background" width="180" height="13">
   <data encoding="base64" compression="zlib">
@@ -125,6 +125,15 @@
   <object id="136" x="1176" y="143.75" width="16" height="16"/>
   <object id="137" x="1543.33" y="128" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="coins"/>
+ <objectgroup name="coins">
+  <object id="192" x="288" y="144" width="16" height="16"/>
+  <object id="193" x="320" y="128" width="16" height="16"/>
+  <object id="194" x="352" y="144" width="16" height="16"/>
+  <object id="195" x="144" y="80" width="16" height="16"/>
+  <object id="196" x="176" y="64" width="16" height="16"/>
+  <object id="197" x="208" y="80" width="16" height="16"/>
+  <object id="198" x="864" y="96" width="16" height="16"/>
+  <object id="199" x="976" y="32" width="16" height="16"/>
+ </objectgroup>
  <objectgroup name="fall"/>
 </map>
