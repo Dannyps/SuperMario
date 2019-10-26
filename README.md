@@ -4,7 +4,7 @@ SuperMario
 
 - [Second Project](#second-project)
 
-Made in colaboration with [Christopher Fernandes de Abreu](https://github.com/cfa911).<br>
+Made in colaboration with [Christopher Fernandes de Abreu](https://github.com/cfa911) **@FEUP** — MIEIC (LPOO).<br>
 
 ## Second Project
 
